@@ -1,5 +1,5 @@
 package com.company.myapp.details.engine;
-public class Engine {
+public abstract class Engine {
     private double torque;//крутящий момент
     public Engine(double torque) {
         this.torque = torque;

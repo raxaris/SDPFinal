@@ -1,6 +1,6 @@
 package com.company.myapp.details.transmission;
 
-public class Transmission {
+public abstract class Transmission {
     private int numberOfGears;
     //constructors
     public Transmission() {
@@ -19,6 +19,6 @@ public class Transmission {
     public int getNumberOfGears() {
         return numberOfGears;
     }
-    
+
 }
 
