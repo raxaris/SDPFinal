@@ -5,6 +5,7 @@ import com.company.myapp.cars.Car;
 import com.company.myapp.repositories.interfaces.ICarRepository;
 
 import java.sql.*;
+import java.util.*;
 
 public class CarRepository implements ICarRepository {
     private final IDB db;
@@ -14,194 +15,104 @@ public class CarRepository implements ICarRepository {
         this.db = db;
     }
 
+    public Car createCarFromResultSet(ResultSet rs) throws SQLException {
+        int id = rs.getInt("id");
+        String brand = rs.getString("brand");
+        String model = rs.getString("model");
+        String engineType = rs.getString("engine_type");
+        String fuel = rs.getString("fuel");
+        int torque = rs.getInt("torque");
+        double volume = rs.getDouble("volume");
+        int power = rs.getInt("power");
+        String transmission = rs.getString("transmission");
+        int gears = rs.getInt("gears");
+        int yearOfProduction = rs.getInt("years");
+        int price = rs.getInt("price");
+        double VIN = rs.getDouble("VIN");
+        String color = rs.getString("color");
+
+        return configurator.createCar(id, brand, model, engineType, fuel, torque, volume, power, transmission, gears, yearOfProduction, price, VIN, color);
+    }
     @Override
     public Car getCar(int id) {
-        Connection con = null;
-        try {
-            con = db.getConnection();
-            String sql = "SELECT * FROM cars WHERE id=?";
-            PreparedStatement st = con.prepareStatement(sql);
+        try (Connection con = db.getConnection();
+             PreparedStatement ps = con.prepareStatement("SELECT * FROM cars WHERE id = ?")) {
 
-            st.setInt(1, id);
+            ps.setInt(1, id);
 
-            ResultSet rs = st.executeQuery();
-            if (rs.next()) {
-                Car car = configurator.createCar(rs.getInt())
-                return car;
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    Car car = createCarFromResultSet(rs);
+                    return car;
+                } else {
+                    return null;
+                }
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                con.close();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
+            return null;
         }
-        return null;
     }
 
-//    @Override
-//    public List<Car> getAllCars() {
-//        Connection con = null;
-//        try {
-//            con = db.getConnection();
-//            String sql = "SELECT * FROM cars";
-//            //String sql = "SELECT id,brand,model,engine_type,fuel,torque,volume,power,transmission,gears,years,price,class,VIN,color  FROM cars WHERE id=?";
-//            Statement st = con.createStatement();
-//
-//            ResultSet rs = st.executeQuery(sql);
-//            List<Car> cars = new LinkedList<>();
-//            while (rs.next()) {
-//                engine = createEngine(rs);
-//                transmission = createTransmission(rs);
-//                car = createCar(rs);
-//                cars.add(car);
-//            }
-//            return cars;
-//        } catch (SQLException throwables) {
-//            throwables.printStackTrace();
-//        } catch (ClassNotFoundException e) {
-//            e.printStackTrace();
-//        } finally {
-//            try {
-//                con.close();
-//            } catch (SQLException throwables) {
-//                throwables.printStackTrace();
-//            }
-//        }
-//        return null;
-//    }
-//    @Override
-//    public List<Car> getCarByPrice(int start, int end) {
-//        Connection con = null;
-//        try {
-//            con = db.getConnection();
-//            String sql = "SELECT * FROM cars";
-//            Statement st = con.createStatement();
-//
-//            ResultSet rs = st.executeQuery(sql);
-//            List<Car> cars = new LinkedList<>();
-//            while (rs.next()) {
-//                if(rs.getInt("price")>=start && rs.getInt("price")<=end) {
-//                    engine = createEngine(rs);
-//                    transmission = createTransmission(rs);
-//                    car = createCar(rs);
-//                    cars.add(car);
-//                }
-//            }
-//            return cars;
-//        } catch (SQLException throwables) {
-//            throwables.printStackTrace();
-//        } catch (ClassNotFoundException e) {
-//            e.printStackTrace();
-//        } finally {
-//            try {
-//                con.close();
-//            } catch (SQLException throwables) {
-//                throwables.printStackTrace();
-//            }
-//        }
-//        return null;
-//    }
-//    @Override
-//    public List<Car> getCarByYear(int start, int end){
-//        Connection con = null;
-//        try {
-//            con = db.getConnection();
-//            String sql = "SELECT * FROM cars";
-//            Statement st = con.createStatement();
-//
-//            ResultSet rs = st.executeQuery(sql);
-//            List<Car> cars = new LinkedList<>();
-//            while (rs.next()) {
-//                if(rs.getInt("years")>=start && rs.getInt("years")<=end) {
-//                    engine = createEngine(rs);
-//                    transmission = createTransmission(rs);
-//                    car = createCar(rs);
-//                    cars.add(car);
-//                }
-//            }
-//            return cars;
-//        } catch (SQLException throwables) {
-//            throwables.printStackTrace();
-//        } catch (ClassNotFoundException e) {
-//            e.printStackTrace();
-//        } finally {
-//            try {
-//                con.close();
-//            } catch (SQLException throwables) {
-//                throwables.printStackTrace();
-//            }
-//        }
-//        return null;
-//    }
-//
-//    @Override
-//    public List<Car> getCarByBrand(String brand) {
-//        Connection con = null;
-//        try {
-//            con = db.getConnection();
-//            String sql = "SELECT * FROM cars";
-//            Statement st = con.createStatement();
-//
-//            ResultSet rs = st.executeQuery(sql);
-//            List<Car> cars = new LinkedList<>();
-//            while (rs.next()) {
-//                if(rs.getString("brand").equals(brand)) {
-//                    engine = createEngine(rs);
-//                    transmission = createTransmission(rs);
-//                    car = createCar(rs);
-//                    cars.add(car);
-//                }
-//            }
-//            return cars;
-//        } catch (SQLException throwables) {
-//            throwables.printStackTrace();
-//        } catch (ClassNotFoundException e) {
-//            e.printStackTrace();
-//        } finally {
-//            try {
-//                con.close();
-//            } catch (SQLException throwables) {
-//                throwables.printStackTrace();
-//            }
-//        }
-//        return null;
-//    }
-//
-//    @Override
-//    public List<Car> getCarByModel(String brand, String model) {
-//        Connection con = null;
-//        try {
-//            con = db.getConnection();
-//            String sql = "SELECT * FROM cars";
-//            Statement st = con.createStatement();
-//
-//            ResultSet rs = st.executeQuery(sql);
-//            List<Car> cars = new LinkedList<>();
-//            while (rs.next()) {
-//                if(rs.getString("brand").equals(brand) && rs.getString("model").equals(model)) {
-//                    engine = createEngine(rs);
-//                    transmission = createTransmission(rs);
-//                    car = createCar(rs);
-//                    cars.add(car);
-//                }
-//            }
-//            return cars;
-//        } catch (SQLException throwables) {
-//            throwables.printStackTrace();
-//        } catch (ClassNotFoundException e) {
-//            e.printStackTrace();
-//        } finally {
-//            try {
-//                con.close();
-//            } catch (SQLException throwables) {
-//                throwables.printStackTrace();
-//            }
-//        }
-//        return null;
-//    }
-//}
+    @Override
+    public List<Car> getAllCars() {
+        try (Connection con = db.getConnection();
+             Statement st = con.createStatement();
+             ResultSet rs = st.executeQuery("SELECT * FROM cars")) {
+
+            List<Car> cars = new ArrayList<>();
+            while (rs.next()) {
+                Car car = createCarFromResultSet(rs);
+                cars.add(car);
+            }
+            return cars;
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+
+    private List<Car> getCarsByQuery(String query, Object... params) {
+        try (Connection con = db.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+
+            for (int i = 0; i < params.length; i++) {
+                ps.setObject(i + 1, params[i]);
+            }
+
+            try (ResultSet rs = ps.executeQuery()) {
+                List<Car> cars = new ArrayList<>();
+                while (rs.next()) {
+                    Car car = createCarFromResultSet(rs);
+                    cars.add(car);
+                }
+                return cars;
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+
+    @Override
+    public List<Car> getCarByPrice(int start, int end) {
+        String query = "SELECT * FROM cars WHERE price BETWEEN ? AND ?";
+        return getCarsByQuery(query, start, end);
+    }
+
+    @Override
+    public List<Car> getCarByYear(int start, int end) {
+        String query = "SELECT * FROM cars WHERE years BETWEEN ? AND ?";
+        return getCarsByQuery(query, start, end);
+    }
+    @Override
+    public List<Car> getCarByBrand(String brand) {
+        String query = "SELECT * FROM cars WHERE brand = ?";
+        return getCarsByQuery(query, brand);
+    }
+    @Override
+    public List<Car> getCarByModel(String brand, String model) {
+        String query = "SELECT * FROM cars WHERE brand = ? AND model = ?";
+        return getCarsByQuery(query, brand, model);
+    }
+}
