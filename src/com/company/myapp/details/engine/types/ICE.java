@@ -6,13 +6,13 @@ public class ICE extends Engine {
     //capacity is the var which shows  the distance car can ride with full fuel tank
     private final String type = "ICE";
     private double engineVolume;
-    private int horsepower;
+    private int horsePower;
     private String typeOfFuel;
 
     public ICE(double torque, double engineVolume, int horsepower, String typeOfFuel) {
         super(torque);
         this.engineVolume = engineVolume;
-        this.horsepower = horsepower;
+        this.horsePower = horsepower;
         this.typeOfFuel = typeOfFuel;
     }
     public String getType() {
@@ -25,7 +25,7 @@ public class ICE extends Engine {
 
 
     public int getHorsepower() {
-        return horsepower;
+        return horsePower;
     }
 
 
@@ -40,6 +40,6 @@ public class ICE extends Engine {
     public String toString() {
         return "ICE " + "\n" + "Torque: "
                 + getTorque() +
-                ", Power: " + horsepower + ", Volume: " + engineVolume + ", Fuel:" + typeOfFuel;
+                ", Power: " + horsePower + ", Volume: " + engineVolume + ", Fuel:" + typeOfFuel;
     }
 }

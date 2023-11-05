@@ -3,7 +3,6 @@ package com.company.myapp.details.engine.types;
 import com.company.myapp.details.engine.Engine;
 
 public class Electro extends Engine {
-    //batteryLifeTime is the var which shows the distance car can ride with full battery
     private final String type = "Electro";
     private int power;
 

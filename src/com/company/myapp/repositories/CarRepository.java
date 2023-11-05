@@ -129,8 +129,7 @@ public class CarRepository implements ICarRepository {
         Connection con = null;
         try {
             con = db.getConnection();
-            //String sql = "SELECT * FROM cars";
-            String sql = "SELECT id,brand,model,engine_type,fuel,torque,volume,power,transmission,gears,years,price,class,vin,color  FROM cars WHERE id=?";
+            String sql = "SELECT * FROM cars WHERE id=?";
             PreparedStatement st = con.prepareStatement(sql);
 
             st.setInt(1, id);
