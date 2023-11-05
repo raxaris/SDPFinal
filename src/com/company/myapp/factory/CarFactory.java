@@ -22,7 +22,7 @@ public abstract class CarFactory {
         Transmission transmission = switch (transmissionType) {
             case "Auto" -> new Auto(gears);
             case "Manual" -> new Manual(gears);
-            default -> throw new IllegalArgumentException("Unsupported engine type: " + transmissionType);
+            default -> throw new IllegalArgumentException("Unsupported transmission type: " + transmissionType);
         };
         return transmission;
     }

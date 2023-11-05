@@ -1,6 +1,6 @@
 package com.company.myapp.repositories.interfaces;
 
-import com.company.myapp.car.Car;
+import com.company.myapp.cars.Car;
 
 import java.util.List;
 
