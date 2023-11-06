@@ -1,7 +1,7 @@
 package com.company.myapp.controllers;
 
 
-import com.company.myapp.car.Car;
+import com.company.myapp.cars.Car;
 import com.company.myapp.repositories.interfaces.ICarRepository;
 
 import java.util.List;
