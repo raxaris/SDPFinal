@@ -15,24 +15,6 @@ public class CarRepository implements ICarRepository {
         this.db = db;
     }
 
-    public Car createCarFromResultSet(ResultSet rs) throws SQLException {
-        int id = rs.getInt("id");
-        String brand = rs.getString("brand");
-        String model = rs.getString("model");
-        String engineType = rs.getString("engine_type");
-        String fuel = rs.getString("fuel");
-        int torque = rs.getInt("torque");
-        double volume = rs.getDouble("volume");
-        int power = rs.getInt("power");
-        String transmission = rs.getString("transmission");
-        int gears = rs.getInt("gears");
-        int yearOfProduction = rs.getInt("years");
-        int price = rs.getInt("price");
-        double VIN = rs.getDouble("VIN");
-        String color = rs.getString("color");
-
-        return configurator.createCar(id, brand, model, engineType, fuel, torque, volume, power, transmission, gears, yearOfProduction, price, VIN, color);
-    }
     @Override
     public Car getCar(int id) {
         try (Connection con = db.getConnection();
@@ -42,7 +24,7 @@ public class CarRepository implements ICarRepository {
 
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    Car car = createCarFromResultSet(rs);
+                    Car car = configurator.createCarFromResultSet(rs);
                     return car;
                 } else {
                     return null;
@@ -62,7 +44,7 @@ public class CarRepository implements ICarRepository {
 
             List<Car> cars = new ArrayList<>();
             while (rs.next()) {
-                Car car = createCarFromResultSet(rs);
+                Car car = configurator.createCarFromResultSet(rs);
                 cars.add(car);
             }
             return cars;
@@ -83,7 +65,7 @@ public class CarRepository implements ICarRepository {
             try (ResultSet rs = ps.executeQuery()) {
                 List<Car> cars = new ArrayList<>();
                 while (rs.next()) {
-                    Car car = createCarFromResultSet(rs);
+                    Car car = configurator.createCarFromResultSet(rs);
                     cars.add(car);
                 }
                 return cars;
