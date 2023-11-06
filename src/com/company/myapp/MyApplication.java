@@ -16,8 +16,57 @@ public class MyApplication {
 
     public void start() {
         while (true) {
-            printMenu();
-            int option = getUserOption();
+            int option = getInitialOption();
+            switch (option) {
+                case 1:
+                    createCarMenu();
+                    break;
+                case 2:
+                    showShowroomMenu();
+                    break;
+                case 0:
+                    System.out.println("Exiting the application. Goodbye!");
+                    return;
+                default:
+                    System.out.println("Invalid option. Please select a valid option (1 or 2).");
+                    break;
+            }
+
+            System.out.println("*************************");
+            System.out.println();
+        }
+    }
+
+    private int getInitialOption() {
+        System.out.println("Select option:");
+        System.out.println("1. Create a car");
+        System.out.println("2. Show showroom");
+        System.out.println("0. Exit");
+        System.out.print("Enter option (1 or 2): ");
+
+        int option = -1;
+        while (option != 1 && option != 2 && option !=0) {
+            if (scanner.hasNextInt()) {
+                option = scanner.nextInt();
+                scanner.nextLine(); //cleaning buffer
+            } else {
+                System.out.println("Input must be an integer.");
+                scanner.nextLine(); //cleaning buffer
+            }
+        }
+        return option;
+    }
+
+    private void createCarMenu() {
+        System.out.println("Creating a new car...");
+    }
+
+    private void showShowroomMenu() {
+        System.out.println();
+        System.out.println("Welcome to the showroom!");
+        while (true) {
+            printShowRoomMenu();
+            int option = getUserShowRoomOption();
 
             switch (option) {
                 case 1:
@@ -39,18 +88,17 @@ public class MyApplication {
                     getCarByModelMenu();
                     break;
                 case 0:
-                    System.out.println("Exiting the application. Goodbye!");
+                    System.out.println("Exiting the showroom.");
                     return;
                 default:
                     System.out.println("Invalid option. Please select a valid option (0-6).");
                     break;
             }
-
             System.out.println("*************************");
         }
     }
 
-    private void printMenu() {
+    private void printShowRoomMenu() {
         System.out.println();
         System.out.println("Select option:");
         System.out.println("1. Get all cars");
@@ -63,7 +111,7 @@ public class MyApplication {
         System.out.println();
     }
 
-    private int getUserOption() {
+    private int getUserShowRoomOption() {
         int option = -1;
         while (option < 0 || option > 6) {
             System.out.print("Enter option (0-6): ");
@@ -122,3 +170,4 @@ public class MyApplication {
         controller.getCarByModel(brand, model);
     }
 }
+
