@@ -10,6 +10,7 @@ public class Main {
         IDB db = DBSingleton.getInstance();
         CarRepository repo = new CarRepository(db);
         CarController controller = new CarController(repo);
-        System.out.println(controller.getCar(2));
+        MyApplication application = new MyApplication(controller);
+        application.start();
     }
 }
