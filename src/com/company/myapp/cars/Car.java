@@ -5,7 +5,7 @@ import com.company.myapp.details.transmission.Transmission;
 
 public abstract class Car {
     protected int id;
-    protected double price;
+    protected int price;
     protected double VIN;
     protected String color;
     protected final int yearOfProduction;
@@ -35,7 +35,7 @@ public abstract class Car {
     public void setColor(String color) {
         this.color = color;
     }
-    public void setPrice(double price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
@@ -44,7 +44,7 @@ public abstract class Car {
         return id;
     }
     public Transmission getTransmission() {return transmission;}
-    public double getPrice() {
+    public int getPrice() {
         return price;
     }
     public String getBrand() {

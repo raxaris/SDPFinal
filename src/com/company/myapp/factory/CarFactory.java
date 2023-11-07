@@ -9,7 +9,7 @@ import com.company.myapp.details.transmission.types.Auto;
 import com.company.myapp.details.transmission.types.Manual;
 
 public abstract class CarFactory {
-    public Engine createEngine(String engineType, String fuel, double torque, double volume, int power) {
+    public Engine createEngine(String engineType, String fuel, int torque, double volume, int power) {
         Engine engine = switch (engineType) {
             case "ICE" -> new ICE(torque, volume, power, fuel);
             case "Electro" -> new Electro(torque, power);

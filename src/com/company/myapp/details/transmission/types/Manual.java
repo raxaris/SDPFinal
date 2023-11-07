@@ -3,7 +3,6 @@ package com.company.myapp.details.transmission.types;
 import com.company.myapp.details.transmission.Transmission;
 
 public class Manual extends Transmission {
-    private final String type = "Manual";
     private int gear;
     private boolean clutchEngaged;
     private boolean isDriving;
@@ -16,6 +15,7 @@ public class Manual extends Transmission {
 
     public Manual(int numberOfGears) {
         super(numberOfGears);
+        type = "Manual";
         this.gear = 1;
         this.clutchEngaged = false;
         this.isDriving = false;

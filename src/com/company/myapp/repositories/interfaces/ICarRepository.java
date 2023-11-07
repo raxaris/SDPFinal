@@ -12,5 +12,6 @@ public interface ICarRepository {
     List<Car> getCarByYear(int start, int end);
     List<Car> getCarByBrand(String brand);
     List<Car> getCarByModel(String brand, String model);
-
+    boolean addCar(Car car);
+    boolean deleteCar(int id);
 }
