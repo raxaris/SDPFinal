@@ -2,12 +2,16 @@ package com.company.myapp.repositories;
 
 import com.company.myapp.cars.Car;
 import com.company.myapp.details.engine.Engine;
+import com.company.myapp.details.engine.types.Electro;
+import com.company.myapp.details.engine.types.ICE;
 import com.company.myapp.details.transmission.Transmission;
 import com.company.myapp.factory.CarFactory;
 import com.company.myapp.factory.brandfactories.*;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Configurator {
     Car car = null;
@@ -23,50 +27,10 @@ public class Configurator {
     CarFactory porscheFactory = new PorscheFactory();
     public Configurator() {}
     public Car createCar(int id, String brand, String model, String engineType, String fuel, int torque, double volume, int power, String transmissionType, int gears, int yearOfProduction, int price, double VIN, String color){
-        switch (brand) {
-            case "Hyundai" -> {
-                engine = hyundaiFactory.createEngine(engineType, fuel, torque, volume, power);
-                transmission = hyundaiFactory.createTransmission(transmissionType, gears);
-                car = hyundaiFactory.createCar(id, model, engine, transmission, VIN, color, yearOfProduction, price);
-            }
-            case "Audi" -> {
-                engine = audiFactory.createEngine(engineType, fuel, torque, volume, power);
-                transmission = audiFactory.createTransmission(transmissionType, gears);
-                car = audiFactory.createCar(id, model, engine, transmission, VIN, color, yearOfProduction, price);
-            }
-            case "Porsche" -> {
-                engine = porscheFactory.createEngine(engineType, fuel, torque, volume, power);
-                transmission = porscheFactory.createTransmission(transmissionType, gears);
-                car = porscheFactory.createCar(id, model, engine, transmission, VIN, color, yearOfProduction, price);
-            }
-            case "BMW" -> {
-                engine = bmwFactory.createEngine(engineType, fuel, torque, volume, power);
-                transmission = bmwFactory.createTransmission(transmissionType, gears);
-                car = bmwFactory.createCar(id, model, engine, transmission, VIN, color, yearOfProduction, price);
-            }
-            case "Mercedes-Benz" -> {
-                engine = mercedesFactory.createEngine(engineType, fuel, torque, volume, power);
-                transmission = mercedesFactory.createTransmission(transmissionType, gears);
-                car = mercedesFactory.createCar(id, model, engine, transmission, VIN, color, yearOfProduction, price);
-            }
-            case "Lamborghini" -> {
-                engine = lamboFactory.createEngine(engineType, fuel, torque, volume, power);
-                transmission = lamboFactory.createTransmission(transmissionType, gears);
-                car = lamboFactory.createCar(id, model, engine, transmission, VIN, color, yearOfProduction, price);
-            }
-            case "Volkswagen" -> {
-                engine = vwFactory.createEngine(engineType, fuel, torque, volume, power);
-                transmission = vwFactory.createTransmission(transmissionType, gears);
-                car = vwFactory.createCar(id, model, engine, transmission, VIN, color, yearOfProduction, price);
-            }
-            case "Toyota" -> {
-                engine = toyotaFactory.createEngine(engineType, fuel, torque, volume, power);
-                transmission = toyotaFactory.createTransmission(transmissionType, gears);
-                car = toyotaFactory.createCar(id, model, engine, transmission, VIN, color, yearOfProduction, price);
-            }
-            default -> throw new IllegalArgumentException("Unsupported car brand: " + brand);
-        }
-
+        CarFactory factory = getCarFactory(brand);
+        engine = factory.createEngine(engineType, fuel, torque, volume, power);
+        transmission = factory.createTransmission(transmissionType, gears);
+        car = factory.createCar(id, model, engine, transmission, VIN, color, yearOfProduction, price);
         return car;
     }
 
@@ -85,50 +49,33 @@ public class Configurator {
         int price = rs.getInt("price");
         double VIN = rs.getDouble("VIN");
         String color = rs.getString("color");
-        switch (brand) {
-            case "Hyundai" -> {
-                engine = hyundaiFactory.createEngine(engineType, fuel, torque, volume, power);
-                transmission = hyundaiFactory.createTransmission(transmissionType, gears);
-                car = hyundaiFactory.createCar(id, model, engine, transmission, VIN, color, yearOfProduction, price);
-            }
-            case "Audi" -> {
-                engine = audiFactory.createEngine(engineType, fuel, torque, volume, power);
-                transmission = audiFactory.createTransmission(transmissionType, gears);
-                car = audiFactory.createCar(id, model, engine, transmission, VIN, color, yearOfProduction, price);
-            }
-            case "Porsche" -> {
-                engine = porscheFactory.createEngine(engineType, fuel, torque, volume, power);
-                transmission = porscheFactory.createTransmission(transmissionType, gears);
-                car = porscheFactory.createCar(id, model, engine, transmission, VIN, color, yearOfProduction, price);
-            }
-            case "BMW" -> {
-                engine = bmwFactory.createEngine(engineType, fuel, torque, volume, power);
-                transmission = bmwFactory.createTransmission(transmissionType, gears);
-                car = bmwFactory.createCar(id, model, engine, transmission, VIN, color, yearOfProduction, price);
-            }
-            case "Mercedes-Benz" -> {
-                engine = mercedesFactory.createEngine(engineType, fuel, torque, volume, power);
-                transmission = mercedesFactory.createTransmission(transmissionType, gears);
-                car = mercedesFactory.createCar(id, model, engine, transmission, VIN, color, yearOfProduction, price);
-            }
-            case "Lamborghini" -> {
-                engine = lamboFactory.createEngine(engineType, fuel, torque, volume, power);
-                transmission = lamboFactory.createTransmission(transmissionType, gears);
-                car = lamboFactory.createCar(id, model, engine, transmission, VIN, color, yearOfProduction, price);
-            }
-            case "Volkswagen" -> {
-                engine = vwFactory.createEngine(engineType, fuel, torque, volume, power);
-                transmission = vwFactory.createTransmission(transmissionType, gears);
-                car = vwFactory.createCar(id, model, engine, transmission, VIN, color, yearOfProduction, price);
-            }
-            case "Toyota" -> {
-                engine = toyotaFactory.createEngine(engineType, fuel, torque, volume, power);
-                transmission = toyotaFactory.createTransmission(transmissionType, gears);
-                car = toyotaFactory.createCar(id, model, engine, transmission, VIN, color, yearOfProduction, price);
-            }
-            default -> throw new IllegalArgumentException("Unsupported car brand: " + brand);
-        }
+        CarFactory factory = getCarFactory(brand);
+        engine = factory.createEngine(engineType, fuel, torque, volume, power);
+        transmission = factory.createTransmission(transmissionType, gears);
+        car = factory.createCar(id, model, engine, transmission, VIN, color, yearOfProduction, price);
+        return car;
+    }
 
-       return car;
+    private CarFactory getCarFactory(String brand) {
+        switch (brand) {
+            case "Hyundai":
+                return hyundaiFactory;
+            case "Audi":
+                return audiFactory;
+            case "Porsche":
+                return porscheFactory;
+            case "BMW":
+                return bmwFactory;
+            case "Mercedes-Benz":
+                return mercedesFactory;
+            case "Lamborghini":
+                return lamboFactory;
+            case "Volkswagen":
+                return vwFactory;
+            case "Toyota":
+                return toyotaFactory;
+            default:
+                throw new IllegalArgumentException("Unsupported car brand: " + brand);
+        }
     }
 }

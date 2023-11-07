@@ -9,12 +9,20 @@ public class User {
     private final String login;
     private String password;
     private final String email;
-    private Cart cart = new Cart();
+    private Cart cart;
 
     public User(String login, String password, String email) {
         this.login = login;
         this.password = password;
         this.email = email;
+        this.cart = new Cart();
+    }
+
+    public User(String login, String password, String email, Cart cart) {
+        this.login = login;
+        this.password = password;
+        this.email = email;
+        this.cart = cart;
     }
 
     public String getLogin() {

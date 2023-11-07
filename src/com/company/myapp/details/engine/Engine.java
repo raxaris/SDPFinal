@@ -1,12 +1,16 @@
 package com.company.myapp.details.engine;
 public abstract class Engine {
-    private double torque;//крутящий момент
-    public Engine(double torque) {
+    protected String type;
+    private int torque;//крутящий момент
+    public Engine(int torque) {
         this.torque = torque;
 
     }
-    public double getTorque() {
+    public int getTorque() {
         return torque;
     }
 
+    public String getType() {
+        return type;
+    }
 }
