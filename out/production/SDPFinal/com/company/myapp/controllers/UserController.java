@@ -1,5 +1,6 @@
 package com.company.myapp.controllers;
 
+import com.company.myapp.cars.Car;
 import com.company.myapp.user.User;
 import com.company.myapp.repositories.interfaces.IUserRepository;
 
