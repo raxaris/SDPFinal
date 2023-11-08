@@ -1,5 +1,7 @@
 package com.company.myapp.user;
 
+import com.company.myapp.user.inferfaces.IUser;
+
 public class User implements IUser {
     private int id;
     private final String login;

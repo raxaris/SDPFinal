@@ -1,6 +1,5 @@
 package com.company.myapp.repositories;
 
-import com.company.myapp.cars.Car;
 import com.company.myapp.data.interfaces.IDB;
 import com.company.myapp.repositories.interfaces.IUserRepository;
 import com.company.myapp.user.User;
@@ -85,5 +84,23 @@ public class UserRepository implements IUserRepository {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public User getUserByCredentials(String login, String password) {
+        try (Connection con = db.getConnection();
+             PreparedStatement ps = con.prepareStatement("SELECT * FROM users WHERE login = ? AND password = ?")) {
+            ps.setString(1, login);
+            ps.setString(2, password);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return configurator.createUserFromResultSet(rs);
+                }
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }

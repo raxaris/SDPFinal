@@ -30,4 +30,8 @@ public class UserController {
         List<User> users = repo.getAllUsers();
         return users;
     }
+
+    public User getUserCredentials(String login, String password) {
+        return repo.getUserByCredentials(login, password);
+    }
 }
