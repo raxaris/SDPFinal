@@ -2,8 +2,6 @@ package com.company.myapp.repositories;
 
 import com.company.myapp.cars.Car;
 import com.company.myapp.details.engine.Engine;
-import com.company.myapp.details.engine.types.Electro;
-import com.company.myapp.details.engine.types.ICE;
 import com.company.myapp.details.transmission.Transmission;
 import com.company.myapp.factory.CarFactory;
 import com.company.myapp.factory.brandfactories.*;
@@ -11,8 +9,6 @@ import com.company.myapp.user.User;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Configurator {
     Car car = null;

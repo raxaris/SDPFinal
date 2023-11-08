@@ -1,7 +1,6 @@
 package com.company.myapp.factory.brandfactories;
 
 import com.company.myapp.cars.Car;
-import com.company.myapp.cars.brands.Audi;
 import com.company.myapp.cars.brands.BMW;
 import com.company.myapp.details.engine.Engine;
 import com.company.myapp.details.transmission.Transmission;

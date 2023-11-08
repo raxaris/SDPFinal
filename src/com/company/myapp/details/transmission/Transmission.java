@@ -15,7 +15,7 @@ public abstract class Transmission {
     public void setNumberOfGears(int numberOfGears) {
         this.numberOfGears = numberOfGears;
     }
-   //getters
+    //getters
     public int getNumberOfGears() {
         return numberOfGears;
     }
