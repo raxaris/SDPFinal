@@ -2,8 +2,6 @@ package com.company.myapp;
 
 import com.company.myapp.cars.Car;
 import com.company.myapp.controllers.CarController;
-
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -17,6 +15,11 @@ public class MyApplication {
     }
 
     public void start() {
+        System.out.println("\n \n \nWelcome to AliSar Car Company!" +
+                "\n ─────▄───▄ \n" +
+                "─▄█▄─█▀█▀█─▄█▄\n" +
+                "▀▀████▄█▄████▀▀\n" +
+                "─────▀█▀█▀\n");
         while (true) {
             int option = getInitialOption();
             switch (option) {

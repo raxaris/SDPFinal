@@ -1,6 +1,5 @@
 package com.company.myapp.controllers;
 
-import com.company.myapp.cars.Car;
 import com.company.myapp.user.User;
 import com.company.myapp.repositories.interfaces.IUserRepository;
 
@@ -29,5 +28,9 @@ public class UserController {
     public List<User> getAllUsers() {
         List<User> users = repo.getAllUsers();
         return users;
+    }
+
+    public User getUserCredentials(String login, String password) {
+        return repo.getUserByCredentials(login, password);
     }
 }

@@ -3,12 +3,13 @@ package com.company.myapp.details.engine.types;
 import com.company.myapp.details.engine.Engine;
 
 public class ICE extends Engine {
+    private int torque;
     private double engineVolume;
     private int horsePower;
     private String typeOfFuel;
 
     public ICE(int torque, double engineVolume, int horsepower, String typeOfFuel) {
-        super(torque);
+        this.torque = torque;
         this.engineVolume = engineVolume;
         this.horsePower = horsepower;
         this.typeOfFuel = typeOfFuel;
@@ -34,6 +35,9 @@ public class ICE extends Engine {
 
     public void setTypeOfFuel(String typeOfFuel) {
         this.typeOfFuel = typeOfFuel;
+    }
+    public int getTorque() {
+        return torque;
     }
 
     public String toString() {
