@@ -2,6 +2,10 @@ package com.company.myapp.repositories;
 
 import com.company.myapp.data.interfaces.IDB;
 import com.company.myapp.cars.Car;
+import com.company.myapp.details.engine.Engine;
+import com.company.myapp.details.engine.types.Electro;
+import com.company.myapp.details.engine.types.ICE;
+import com.company.myapp.details.transmission.Transmission;
 import com.company.myapp.repositories.interfaces.ICarRepository;
 
 import java.sql.*;
@@ -96,5 +100,59 @@ public class CarRepository implements ICarRepository {
     public List<Car> getCarByModel(String brand, String model) {
         String query = "SELECT * FROM cars WHERE brand = ? AND model = ?";
         return getCarsByQuery(query, brand, model);
+    }
+    @Override
+    public boolean deleteCar(int id) {
+        try (Connection con = db.getConnection();
+             PreparedStatement ps = con.prepareStatement("DELETE FROM cars WHERE id = ?")) {
+
+            ps.setInt(1, id);
+
+            return ps.executeUpdate() > 0;
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    @Override
+    public boolean addCar(Car car){
+        try (Connection con = db.getConnection();
+             PreparedStatement ps = con.prepareStatement("INSERT INTO cars (brand, model, engine_type, fuel, torque, volume, power, transmission, gears, years, price, VIN, color) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")){
+
+            ps.setString(1, car.getBrand());
+            ps.setString(2, car.getModel());
+            Engine engine = car.getEngine();
+            ps.setString(3, engine.getType());
+
+            if (engine instanceof ICE) {
+                ICE ice = (ICE) engine;
+                ps.setString(4, ice.getTypeOfFuel());
+                ps.setInt(5, ice.getTorque());
+                ps.setDouble(6, ice.getEngineVolume());
+                ps.setInt(7, ice.getHorsepower());
+            } else if (engine instanceof Electro) {
+                Electro electro = (Electro) engine;
+                ps.setNull(4, Types.VARCHAR);
+                ps.setInt(5, electro.getTorque());
+                ps.setNull(6, java.sql.Types.DOUBLE);
+                ps.setInt(7, electro.getPower());
+            } else {
+                throw new IllegalArgumentException("Error. Invalid engine type");
+            }
+
+            Transmission transmission = car.getTransmission();
+            ps.setString(8, transmission.getType());
+            ps.setInt(9, transmission.getNumberOfGears());
+            ps.setInt(10, car.getYearOfProduction());
+            ps.setInt(11, car.getPrice());
+            ps.setDouble(12, car.getVIN());
+            ps.setString(13, car.getColor());
+
+
+            return ps.executeUpdate() > 0;
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

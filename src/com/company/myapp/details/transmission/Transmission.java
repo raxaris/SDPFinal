@@ -1,8 +1,8 @@
 package com.company.myapp.details.transmission;
 
 public abstract class Transmission {
+    protected String type;
     private int numberOfGears;
-    //constructors
     public Transmission() {
     }
 
@@ -19,6 +19,8 @@ public abstract class Transmission {
     public int getNumberOfGears() {
         return numberOfGears;
     }
-
+    public String getType(){
+        return type;
+    }
 }
 

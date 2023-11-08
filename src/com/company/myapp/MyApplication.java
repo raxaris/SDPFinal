@@ -130,6 +130,7 @@ public class MyApplication {
         controller.getAllCars();
     }
 
+
     private void getCarByIdMenu() {
         System.out.println("Please enter id: ");
         int id = scanner.nextInt();
