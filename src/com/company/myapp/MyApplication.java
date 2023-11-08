@@ -1,8 +1,10 @@
 package com.company.myapp;
 
+import com.company.myapp.cars.Car;
 import com.company.myapp.controllers.CarController;
 
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class MyApplication {
@@ -127,7 +129,7 @@ public class MyApplication {
     }
 
     private void getAllCarsMenu() {
-        controller.getAllCars();
+        displayCars(controller.getAllCars());
     }
 
 
@@ -144,7 +146,7 @@ public class MyApplication {
         int start = scanner.nextInt();
         System.out.print("End price: ");
         int end = scanner.nextInt();
-        controller.getCarByPrice(start, end);
+        displayCars(controller.getCarByPrice(start, end));
     }
 
     private void getCarByYearMenu() {
@@ -153,13 +155,13 @@ public class MyApplication {
         int start = scanner.nextInt();
         System.out.print("End year: ");
         int end = scanner.nextInt();
-        controller.getCarByYear(start, end);
+        displayCars(controller.getCarByYear(start, end));
     }
 
     private void getCarByBrandMenu() {
         System.out.print("Please enter car brand: ");
         String brand = scanner.next();
-        controller.getCarByBrand(brand);
+        displayCars(controller.getCarByBrand(brand));
     }
 
     private void getCarByModelMenu() {
@@ -168,7 +170,16 @@ public class MyApplication {
         System.out.print("Please enter car model: ");
         scanner.nextLine();
         String model = scanner.nextLine();
-        controller.getCarByModel(brand, model);
+        displayCars(controller.getCarByModel(brand, model));
+    }
+    private void displayCars(List<Car> cars) {
+        if (cars == null || cars.isEmpty()) {
+            System.out.println("Cars were not found!");
+        } else {
+            for (Car car : cars) {
+                System.out.println(car.toString());
+            }
+        }
     }
 }
 

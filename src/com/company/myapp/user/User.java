@@ -4,6 +4,7 @@ import com.company.myapp.cars.Car;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.SortedMap;
 
 public class User {
     private final String login;
@@ -42,5 +43,8 @@ public class User {
     }
     public Cart getCart(){
         return cart;
+    }
+    public void update(String message){
+        System.out.println(message);
     }
 }

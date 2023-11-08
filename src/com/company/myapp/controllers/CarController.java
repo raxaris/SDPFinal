@@ -11,43 +11,36 @@ public class CarController {
     public CarController(ICarRepository repo) {
         this.repo = repo;
     }
-
+    public boolean addCar(Car car){
+       return repo.addCar(car);
+    }
     public String getCar(int id) {
         Car car = repo.getCar(id);
         return (car == null ? "Car was not found!" : car.toString());
     }
 
-    private void displayCars(List<Car> cars) {
-        if (cars == null || cars.isEmpty()) {
-            System.out.println("Cars were not found!");
-        } else {
-            for (Car car : cars) {
-                System.out.println(car.toString());
-            }
-        }
-    }
-    public void getAllCars() {
+    public List<Car> getAllCars() {
         List<Car> cars = repo.getAllCars();
-        displayCars(cars);
+        return cars;
     }
 
-    public void getCarByPrice(int start, int end) {
+    public List<Car> getCarByPrice(int start, int end) {
         List<Car> cars = repo.getCarByPrice(start, end);
-        displayCars(cars);
+        return cars;
     }
 
-    public void getCarByYear(int start, int end) {
+    public List<Car> getCarByYear(int start, int end) {
         List<Car> cars = repo.getCarByYear(start, end);
-        displayCars(cars);
+        return cars;
     }
 
-    public void getCarByBrand(String brand) {
+    public List<Car> getCarByBrand(String brand) {
         List<Car> cars = repo.getCarByBrand(brand);
-        displayCars(cars);
+        return cars;
     }
 
-    public void getCarByModel(String brand, String model) {
+    public List<Car> getCarByModel(String brand, String model) {
         List<Car> cars = repo.getCarByModel(brand, model);
-        displayCars(cars);
+        return cars;
     }
 }
