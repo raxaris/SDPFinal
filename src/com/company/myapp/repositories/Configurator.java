@@ -7,6 +7,7 @@ import com.company.myapp.details.engine.types.ICE;
 import com.company.myapp.details.transmission.Transmission;
 import com.company.myapp.factory.CarFactory;
 import com.company.myapp.factory.brandfactories.*;
+import com.company.myapp.user.User;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -78,4 +79,16 @@ public class Configurator {
                 throw new IllegalArgumentException("Unsupported car brand: " + brand);
         }
     }
+
+    public User createUserFromResultSet(ResultSet rs) throws SQLException {
+        int id = rs.getInt("id");
+        String login = rs.getString("login");
+        String password = rs.getString("password");
+        String email = rs.getString("email");
+        boolean isAdmin = rs.getBoolean("isAdmin");
+
+        User user = new User(id, login, password, email, isAdmin);
+        return user;
+    }
+
 }

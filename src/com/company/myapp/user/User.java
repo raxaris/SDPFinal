@@ -1,33 +1,36 @@
 package com.company.myapp.user;
 
-import com.company.myapp.cars.Car;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.SortedMap;
-
-public class User {
+public class User implements IUser {
+    private int id;
     private final String login;
     private String password;
     private final String email;
     private Cart cart;
-
-    public User(String login, String password, String email) {
+    private boolean isAdmin;
+    public User(int id, String login,String password, String email, boolean isAdmin) {
         this.login = login;
         this.password = password;
         this.email = email;
+        this.isAdmin = isAdmin;
         this.cart = new Cart();
     }
 
-    public User(String login, String password, String email, Cart cart) {
+    public User(int id, String login, String password, String email, boolean isAdmin, Cart cart) {
         this.login = login;
         this.password = password;
         this.email = email;
+        this.isAdmin = isAdmin;
         this.cart = cart;
     }
 
+    public int getId() {
+        return id;
+    }
     public String getLogin() {
         return login;
+    }
+    public String getName() {
+        return email;
     }
 
     public String getPassword() {
@@ -45,6 +48,10 @@ public class User {
         return cart;
     }
     public void update(String message){
-        System.out.println(message);
+        System.out.println(login + ": " + message);
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
     }
 }

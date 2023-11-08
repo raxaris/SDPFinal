@@ -14,6 +14,11 @@ public class CarController {
     public boolean addCar(Car car){
        return repo.addCar(car);
     }
+
+    public boolean removeCar(Car car){
+        return repo.deleteCar(car.getId());
+    }
+
     public String getCar(int id) {
         Car car = repo.getCar(id);
         return (car == null ? "Car was not found!" : car.toString());
