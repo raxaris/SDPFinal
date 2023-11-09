@@ -4,6 +4,7 @@ import com.company.myapp.cars.Car;
 import com.company.myapp.controllers.CarController;
 import com.company.myapp.user.User;
 import com.company.myapp.user.inferfaces.IPublisher;
+import com.company.myapp.user.inferfaces.IUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,5 +28,13 @@ public class ShowRoom {
         controller.removeCar(car);
         carManager.notifySubscribers("Removed: \n" + car.toString());
     }
+    public void subscribe(IUser subscriber) {
+        carManager.subscribe(subscriber);
+    }
+
+    public void unSubscribe(IUser subscriber) {
+        carManager.unSubscribe(subscriber);
+    }
+
 
 }
