@@ -21,16 +21,23 @@ public class MyApplication {
     }
 
     public void start(){
-
+        authenticatorMenu();
+        if(user != null) {
+            if (user.isAdmin()) {
+                startAdminApplication();
+            } else {
+                startUserApplication();
+            }
+        }
     }
 
     public void authenticatorMenu() {
         System.out.println("Login | Sign Up");
         while (true) {
-            int option = getInitialOption();
+            int option = getMenuInput("Select option:\n1. Login.\n2. Sign up for free.\n0. Exit\nEnter option (1 or 2): ", 2);
             switch (option) {
                 case 1:
-                    loginMenu();
+                    if(loginMenu()) return;
                     break;
                 case 2:
                     signUpMenu();
@@ -46,13 +53,16 @@ public class MyApplication {
     }
 
     public void startUserApplication() {
-        System.out.println("\n \n \nWelcome to AliSar Car Company!" +
-                "\n ─────▄───▄ \n" +
-                "─▄█▄─█▀█▀█─▄█▄\n" +
-                "▀▀████▄█▄████▀▀\n" +
-                "─────▀█▀█▀\n");
+        System.out.println("""
+                
+                Welcome to AliSar Car Company!
+                 ─────▄───▄
+                ─▄█▄─█▀█▀█─▄█▄
+                ▀▀████▄█▄████▀▀
+                ─────▀█▀█▀
+                """);
         while (true) {
-            int option = getSecondOption();
+            int option = getMenuInput("Select option:\n1. Create a car\n2. Show showroom\n0. Exit\nEnter option (1 or 2): ", 2);
             switch (option) {
                 case 1:
                     createCarMenu();
@@ -72,47 +82,9 @@ public class MyApplication {
             System.out.println();
         }
     }
+    public void startAdminApplication() {
 
-    private int getInitialOption() {
-        System.out.println("Select option:");
-        System.out.println("1. Login.");
-        System.out.println("2. Sign up for free.");
-        System.out.println("0. Exit");
-        System.out.print("Enter option (1 or 2): ");
-
-        int option = -1;
-        while (option != 1 && option != 2 && option !=0) {
-            if (scanner.hasNextInt()) {
-                option = scanner.nextInt();
-                scanner.nextLine(); //cleaning buffer
-            } else {
-                System.out.println("Input must be an integer.");
-                scanner.nextLine(); //cleaning buffer
-            }
-        }
-        return option;
     }
-
-    private int getSecondOption() {
-        System.out.println("Select option:");
-        System.out.println("1. Create a car");
-        System.out.println("2. Show showroom");
-        System.out.println("0. Exit");
-        System.out.print("Enter option (1 or 2): ");
-
-        int option = -1;
-        while (option != 1 && option != 2 && option !=0) {
-            if (scanner.hasNextInt()) {
-                option = scanner.nextInt();
-                scanner.nextLine(); //cleaning buffer
-            } else {
-                System.out.println("Input must be an integer.");
-                scanner.nextLine(); //cleaning buffer
-            }
-        }
-        return option;
-    }
-
     private void createCarMenu() {
         System.out.println("Creating a new car...");
     }
@@ -122,7 +94,7 @@ public class MyApplication {
         System.out.println("Welcome to the showroom!");
         while (true) {
             printShowRoomMenu();
-            int option = getUserShowRoomOption();
+            int option = getMenuInput("Enter option (0-6): ", 6);
 
             switch (option) {
                 case 1:
@@ -167,85 +139,94 @@ public class MyApplication {
         System.out.println();
     }
 
-    private int getUserShowRoomOption() {
-        int option = -1;
-        while (option < 0 || option > 6) {
-            System.out.print("Enter option (0-6): ");
-            if (scanner.hasNextInt()) {
-                option = scanner.nextInt();
-                scanner.nextLine();
-            } else {
-                System.out.println("Input must be an integer.");
-                scanner.nextLine();
-            }
-        }
-        return option;
-    }
-
     private void getAllCarsMenu() {
         displayCars(carController.getAllCars());
     }
 
 
     private void getCarByIdMenu() {
-        System.out.println("Please enter id: ");
-        int id = scanner.nextInt();
+        int id = getUserInputInt("Please enter id: ");
         String response = carController.getCar(id);
         System.out.println(response);
     }
 
     private void getCarByPriceMenu() {
-        System.out.println("Please enter price range.");
-        System.out.print("Start price: ");
-        int start = scanner.nextInt();
-        System.out.print("End price: ");
-        int end = scanner.nextInt();
+        int start = getUserInputInt("Please enter start price: ");
+        int end = getUserInputInt("Please enter end price: ");
         displayCars(carController.getCarByPrice(start, end));
     }
 
     private void getCarByYearMenu() {
-        System.out.println("Please enter year range.");
-        System.out.print("Start year: ");
-        int start = scanner.nextInt();
-        System.out.print("End year: ");
-        int end = scanner.nextInt();
+        int start = getUserInputInt("Please enter start year: ");
+        int end = getUserInputInt("Please enter end year: ");
         displayCars(carController.getCarByYear(start, end));
     }
 
     private void getCarByBrandMenu() {
-        System.out.print("Please enter car brand: ");
-        String brand = scanner.next();
+        String brand = getUserInputString("Please enter car brand: ");
         displayCars(carController.getCarByBrand(brand));
     }
 
     private void getCarByModelMenu() {
-        System.out.print("Please enter car brand: ");
-        String brand = scanner.next();
-        System.out.print("Please enter car model: ");
-        scanner.nextLine();
-        String model = scanner.nextLine();
+        String brand = getUserInputString("Please enter car brand: ");
+        String model = getUserInputString("Please enter car model: ");
         displayCars(carController.getCarByModel(brand, model));
     }
+
     private void displayCars(List<Car> cars) {
         if (cars == null || cars.isEmpty()) {
             System.out.println("Cars were not found!");
         } else {
-            for (Car car : cars) {
-                System.out.println(car.toString());
-            }
+            cars.forEach(car -> System.out.println(car.toString()));
         }
     }
 
-    private void loginMenu() {
-        System.out.print("Please enter your login: ");
-        String login = scanner.next();
-        System.out.print("Please enter your password: ");
-        String password = scanner.nextLine();
-        user = userController.getUserCredentials(login, password);
-        if (user != null) {
-            System.out.println("You successfully logged in!");
-        } else {
-            System.out.println("Incorrect login or password. Try again!");
+    private int getUserInputInt(String message) {
+        System.out.print(message);
+        return scanner.nextInt();
+    }
+
+    private int getMenuInput(String message, int maxOption) {
+        int option = -1;
+        while (true) {
+            System.out.print(message);
+            if (scanner.hasNextInt()) {
+                option = scanner.nextInt();
+
+                if (option >= 0 && option <= maxOption) {
+                    break;
+                } else {
+                    System.out.println("Invalid option. Please select a valid option (0-" + maxOption + ").");
+                }
+            } else {
+                System.out.println("Input must be an integer.");
+                scanner.next(); // consume invalid input
+            }
+        }
+
+        scanner.nextLine(); // cleaning buffer
+        return option;
+    }
+
+    private String getUserInputString(String message) {
+        System.out.print(message);
+        return scanner.next();
+    }
+
+    private boolean loginMenu() {
+        while (true){
+            System.out.print("Please enter your login: ");
+            String login = scanner.next();
+            System.out.print("Please enter your password: ");
+            String password = scanner.next();
+
+            user = userController.getUserCredentials(login, password);
+            if (user != null) {
+                System.out.println("You successfully logged in!");
+                return true;
+            } else {
+                System.out.println("Incorrect login or password. Try again!");
+            }
         }
     }
 
@@ -253,21 +234,25 @@ public class MyApplication {
         while (true) {
             System.out.print("Please enter login: ");
             String login = scanner.next();
+
             if (!userController.isLoginAvailable(login)) {
                 System.out.println("This login is unavailable");
                 continue;
             }
+
             System.out.print("Please enter password: ");
             String password = scanner.next();
             System.out.print("Please enter e-mail: ");
             String email = scanner.next();
+
             user = new User(login, password, email, false);
+
             if (userController.addUser(user)) {
                 System.out.println("You signed up successfully!");
+                break;
             } else {
                 System.out.println("Error. Try again!");
             }
-            break;
         }
     }
 }
