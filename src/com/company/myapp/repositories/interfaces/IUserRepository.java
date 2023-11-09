@@ -9,4 +9,5 @@ public interface IUserRepository {
     boolean addUser(User user);
     boolean deleteUser(int id);
     User getUserByCredentials(String login, String password);
+    boolean isLoginAvailable(String login);
 }

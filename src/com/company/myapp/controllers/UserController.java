@@ -16,7 +16,7 @@ public class UserController {
         return repo.addUser(user);
     }
 
-    public boolean removeUser(User user){
+    public boolean  removeUser(User user){
         return repo.deleteUser(user.getId());
     }
 
@@ -32,5 +32,9 @@ public class UserController {
 
     public User getUserCredentials(String login, String password) {
         return repo.getUserByCredentials(login, password);
+    }
+
+    public boolean isLoginAvailable(String login){
+        return repo.isLoginAvailable(login);
     }
 }

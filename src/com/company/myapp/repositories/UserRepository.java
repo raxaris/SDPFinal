@@ -103,4 +103,18 @@ public class UserRepository implements IUserRepository {
 
         return null;
     }
+
+    public boolean isLoginAvailable(String login) {
+        try (Connection con = db.getConnection();
+             PreparedStatement ps = con.prepareStatement("SELECT * FROM users WHERE login = ?")) {
+            ps.setString(1, login);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                return !rs.next();
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
