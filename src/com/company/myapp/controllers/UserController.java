@@ -16,7 +16,7 @@ public class UserController {
         return repo.addUser(user);
     }
 
-    public boolean removeUser(User user){
+    public boolean  removeUser(User user){
         return repo.deleteUser(user.getId());
     }
 
