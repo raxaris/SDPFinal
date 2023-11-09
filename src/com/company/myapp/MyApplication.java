@@ -2,26 +2,57 @@ package com.company.myapp;
 
 import com.company.myapp.cars.Car;
 import com.company.myapp.controllers.CarController;
+import com.company.myapp.controllers.UserController;
+import com.company.myapp.user.User;
+
 import java.util.List;
 import java.util.Scanner;
 
 public class MyApplication {
-    private final CarController controller;
+    private final CarController carController;
+    private final UserController userController;
     private final Scanner scanner;
+    private User user;
 
-    public MyApplication(CarController controller) {
-        this.controller = controller;
+    public MyApplication(CarController carController, UserController userController) {
+        this.carController = carController;
+        this.userController = userController;
         scanner = new Scanner(System.in);
     }
 
-    public void start() {
+    public void start(){
+
+    }
+
+    public void authenticatorMenu() {
+        System.out.println("Login | Sign Up");
+        while (true) {
+            int option = getInitialOption();
+            switch (option) {
+                case 1:
+                    loginMenu();
+                    break;
+                case 2:
+                    signUpMenu();
+                    break;
+                case 0:
+                    System.out.println("Exiting the application. Goodbye!");
+                    return;
+                default:
+                    System.out.println("Invalid option. Please select a valid option (1 or 2).");
+                    break;
+            }
+        }
+    }
+
+    public void startUserApplication() {
         System.out.println("\n \n \nWelcome to AliSar Car Company!" +
                 "\n ─────▄───▄ \n" +
                 "─▄█▄─█▀█▀█─▄█▄\n" +
                 "▀▀████▄█▄████▀▀\n" +
                 "─────▀█▀█▀\n");
         while (true) {
-            int option = getInitialOption();
+            int option = getSecondOption();
             switch (option) {
                 case 1:
                     createCarMenu();
@@ -43,6 +74,26 @@ public class MyApplication {
     }
 
     private int getInitialOption() {
+        System.out.println("Select option:");
+        System.out.println("1. Login.");
+        System.out.println("2. Sign up for free.");
+        System.out.println("0. Exit");
+        System.out.print("Enter option (1 or 2): ");
+
+        int option = -1;
+        while (option != 1 && option != 2 && option !=0) {
+            if (scanner.hasNextInt()) {
+                option = scanner.nextInt();
+                scanner.nextLine(); //cleaning buffer
+            } else {
+                System.out.println("Input must be an integer.");
+                scanner.nextLine(); //cleaning buffer
+            }
+        }
+        return option;
+    }
+
+    private int getSecondOption() {
         System.out.println("Select option:");
         System.out.println("1. Create a car");
         System.out.println("2. Show showroom");
@@ -132,14 +183,14 @@ public class MyApplication {
     }
 
     private void getAllCarsMenu() {
-        displayCars(controller.getAllCars());
+        displayCars(carController.getAllCars());
     }
 
 
     private void getCarByIdMenu() {
         System.out.println("Please enter id: ");
         int id = scanner.nextInt();
-        String response = controller.getCar(id);
+        String response = carController.getCar(id);
         System.out.println(response);
     }
 
@@ -149,7 +200,7 @@ public class MyApplication {
         int start = scanner.nextInt();
         System.out.print("End price: ");
         int end = scanner.nextInt();
-        displayCars(controller.getCarByPrice(start, end));
+        displayCars(carController.getCarByPrice(start, end));
     }
 
     private void getCarByYearMenu() {
@@ -158,13 +209,13 @@ public class MyApplication {
         int start = scanner.nextInt();
         System.out.print("End year: ");
         int end = scanner.nextInt();
-        displayCars(controller.getCarByYear(start, end));
+        displayCars(carController.getCarByYear(start, end));
     }
 
     private void getCarByBrandMenu() {
         System.out.print("Please enter car brand: ");
         String brand = scanner.next();
-        displayCars(controller.getCarByBrand(brand));
+        displayCars(carController.getCarByBrand(brand));
     }
 
     private void getCarByModelMenu() {
@@ -173,7 +224,7 @@ public class MyApplication {
         System.out.print("Please enter car model: ");
         scanner.nextLine();
         String model = scanner.nextLine();
-        displayCars(controller.getCarByModel(brand, model));
+        displayCars(carController.getCarByModel(brand, model));
     }
     private void displayCars(List<Car> cars) {
         if (cars == null || cars.isEmpty()) {
@@ -182,6 +233,41 @@ public class MyApplication {
             for (Car car : cars) {
                 System.out.println(car.toString());
             }
+        }
+    }
+
+    private void loginMenu() {
+        System.out.print("Please enter your login: ");
+        String login = scanner.next();
+        System.out.print("Please enter your password: ");
+        String password = scanner.nextLine();
+        user = userController.getUserCredentials(login, password);
+        if (user != null) {
+            System.out.println("You successfully logged in!");
+        } else {
+            System.out.println("Incorrect login or password. Try again!");
+        }
+    }
+
+    private void signUpMenu() {
+        while (true) {
+            System.out.print("Please enter login: ");
+            String login = scanner.next();
+            if (!userController.isLoginAvailable(login)) {
+                System.out.println("This login is unavailable");
+                continue;
+            }
+            System.out.print("Please enter password: ");
+            String password = scanner.next();
+            System.out.print("Please enter e-mail: ");
+            String email = scanner.next();
+            user = new User(login, password, email, false);
+            if (userController.addUser(user)) {
+                System.out.println("You signed up successfully!");
+            } else {
+                System.out.println("Error. Try again!");
+            }
+            break;
         }
     }
 }

@@ -33,4 +33,8 @@ public class UserController {
     public User getUserCredentials(String login, String password) {
         return repo.getUserByCredentials(login, password);
     }
+
+    public boolean isLoginAvailable(String login){
+        return repo.isLoginAvailable(login);
+    }
 }
