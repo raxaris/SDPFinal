@@ -26,7 +26,6 @@ public abstract class Car {
         this.yearOfProduction = yearOfProduction;
     }
     protected Car() {}
-    //setters
 
     private void setVIN(double VIN) {
         this.VIN = VIN;

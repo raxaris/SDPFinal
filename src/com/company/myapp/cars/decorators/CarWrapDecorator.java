@@ -1,23 +1,21 @@
-package com.company.myapp.decorators;
+package com.company.myapp.cars.decorators;
 
 
 import com.company.myapp.cars.Car;
 import com.company.myapp.details.engine.interfaces.IEngineStrategy;
 import com.company.myapp.details.transmission.Transmission;
 
-public abstract class CarBodyKitDecorator extends Car {
+public abstract class CarWrapDecorator extends Car {
     Car car;
     public abstract String toString();
-    public CarBodyKitDecorator(Car car){
+    public abstract int getPrice();
+    public CarWrapDecorator(Car car){
         this.car = car;
     }
     public int getId() {
         return  car.getId();
     }
     public Transmission getTransmission() {return car.getTransmission();}
-    public int getPrice() {
-        return car.getPrice();
-    }
     public String getBrand() {
         return car.getBrand();
     }
