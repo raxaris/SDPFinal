@@ -1,5 +1,7 @@
 package com.company.myapp.details.engine.types;
 
+import com.company.myapp.details.engine.Adapter.Interfaces.ElectricPower;
+import com.company.myapp.details.engine.Adapter.Interfaces.GasolineType;
 import com.company.myapp.details.engine.Engine;
 
 public class ElectroEngineStrategy extends Engine {
@@ -16,8 +18,8 @@ public class ElectroEngineStrategy extends Engine {
         return power;
     }
 
-    @Override
-    public void startEngine() {
+
+    public void startEngine(ElectricPower electricity) {
         System.out.println("No sound.");
     }
 
