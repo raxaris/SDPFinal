@@ -16,10 +16,6 @@ public class ElectroEngineStrategy extends Engine {
         return power;
     }
 
-    public String getType() {
-        return type;
-    }
-
     @Override
     public void startEngine() {
         System.out.println("No sound.");
