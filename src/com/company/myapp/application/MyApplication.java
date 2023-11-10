@@ -1,4 +1,4 @@
-package com.company.myapp;
+package com.company.myapp.application;
 
 import com.company.myapp.cars.Car;
 import com.company.myapp.controllers.CarController;
