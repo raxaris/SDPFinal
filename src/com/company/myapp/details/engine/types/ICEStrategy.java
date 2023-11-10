@@ -15,9 +15,6 @@ public class ICEStrategy extends Engine {
         this.typeOfFuel = typeOfFuel;
         type = "ICE";
     }
-    public String getType() {
-        return type;
-    }
 
     public void startEngine() {
         System.out.println("Sound of " + engineVolume + "L, " + horsePower + "HP " + "engine." );

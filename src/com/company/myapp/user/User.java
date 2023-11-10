@@ -8,7 +8,7 @@ public class User implements IUser {
     private String password;
     private final String email;
     private Cart cart;
-    private boolean isAdmin;
+    private final boolean isAdmin;
     public User(int id, String login,String password, String email, boolean isAdmin) {
         this.login = login;
         this.password = password;

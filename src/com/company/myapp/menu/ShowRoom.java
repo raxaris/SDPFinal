@@ -5,34 +5,33 @@ import com.company.myapp.controllers.CarController;
 import com.company.myapp.user.inferfaces.IPublisher;
 import com.company.myapp.user.inferfaces.IUser;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ShowRoom {
     private final CarController controller;
-    private final IPublisher carManager;
+    private final IPublisher ShowRoomManager;
     private final List<Car> cars;
-    public ShowRoom(CarController controller, IPublisher carManager) {
+    public ShowRoom(CarController controller, IPublisher ShowRoomManager) {
         this.controller = controller;
         cars = controller.getAllCars();
-        this.carManager = carManager;
+        this.ShowRoomManager = ShowRoomManager;
     }
     public void addCar(Car car){
         cars.add(car);
         controller.addCar(car);
-        carManager.notifySubscribers("Added: \n" + car.toString());
+        ShowRoomManager.notifySubscribers("Added: \n" + car.toString());
     }
     public void removeCar(Car car){
         cars.remove(car);
         controller.removeCar(car);
-        carManager.notifySubscribers("Removed: \n" + car.toString());
+        ShowRoomManager.notifySubscribers("Removed: \n" + car.toString());
     }
     public void subscribe(IUser subscriber) {
-        carManager.subscribe(subscriber);
+        ShowRoomManager.subscribe(subscriber);
     }
 
     public void unSubscribe(IUser subscriber) {
-        carManager.unSubscribe(subscriber);
+        ShowRoomManager.unSubscribe(subscriber);
     }
 
 

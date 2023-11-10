@@ -9,11 +9,11 @@ public abstract class Car {
     protected int price;
     protected double VIN;
     protected String color;
-    protected final int yearOfProduction;
-    protected final String brand;
-    protected final String model;
-    protected final IEngineStrategy engine;
-    protected final Transmission transmission;
+    protected  int yearOfProduction;
+    protected String brand;
+    protected String model;
+    protected IEngineStrategy engine;
+    protected Transmission transmission;
 
     public Car(int id, String brand, String model, IEngineStrategy engine, Transmission transmission, double VIN, String color, int yearOfProduction, int price) {
         setVIN(VIN);
@@ -26,8 +26,7 @@ public abstract class Car {
         this.transmission = transmission;
         this.yearOfProduction = yearOfProduction;
     }
-
-
+    protected Car() {}
     //setters
 
     private void setVIN(double VIN) {
@@ -58,7 +57,7 @@ public abstract class Car {
     public String getColor() {return color;}
     public int getYearOfProduction() {return yearOfProduction;}
     public IEngineStrategy getEngine() {return engine;}
-    public void startEngine() {System.out.println("Engine started. Car");}
+    public void startEngine() {System.out.println("Engine started.");}
     public void stopEngine() {System.out.println("Engine stopped.");}
 
     @Override
