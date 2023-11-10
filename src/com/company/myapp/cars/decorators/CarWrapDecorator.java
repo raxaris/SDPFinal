@@ -2,7 +2,7 @@ package com.company.myapp.cars.decorators;
 
 
 import com.company.myapp.cars.Car;
-import com.company.myapp.details.engine.interfaces.IEngineStrategy;
+import com.company.myapp.details.engine.Engine;
 import com.company.myapp.details.transmission.Transmission;
 
 public abstract class CarWrapDecorator extends Car {
@@ -31,7 +31,7 @@ public abstract class CarWrapDecorator extends Car {
     public int getYearOfProduction() {
         return car.getYearOfProduction();
     }
-    public IEngineStrategy getEngine() {
+    public Engine getEngine() {
         return car.getEngine();
     }
 

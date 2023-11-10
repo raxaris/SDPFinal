@@ -24,11 +24,19 @@ public class Cart {
         }
     }
     public void displayCartInfo() {
-        System.out.println("Your cart:");
-        for (int i = 0; i < cart.size(); i++) {
-            Car car = cart.get(i);
-            System.out.println("ID: " + i);
-            System.out.println(car.toString());
+        if (!cart.isEmpty()) {
+            System.out.println("\nYour cart:");
+            int id = 0;
+            for (Car car : cart) {
+                System.out.println("Cart ID: " + id++);
+                System.out.println(car);
+            }
+        } else {
+            System.out.println("\nYour cart is empty :(");
         }
+    }
+
+    public void clearCart(){
+        cart.clear();
     }
 }

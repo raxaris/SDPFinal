@@ -19,9 +19,9 @@ public class CarController {
         return carRepository.deleteCar(car.getId());
     }
 
-    public String getCar(int id) {
+    public Car getCar(int id) {
         Car car = carRepository.getCar(id);
-        return (car == null ? "Car was not found!" : car.toString());
+        return car;
     }
 
     public List<Car> getAllCars() {

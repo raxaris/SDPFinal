@@ -1,8 +1,9 @@
-package com.company.myapp;
+package com.company.myapp.application;
 
 import com.company.myapp.cars.Car;
 import com.company.myapp.controllers.CarController;
 import com.company.myapp.controllers.UserController;
+import com.company.myapp.menu.ShowRoom;
 import com.company.myapp.user.User;
 
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.Scanner;
 public class MyApplication {
     private final CarController carController;
     private final UserController userController;
+    ShowRoom showRoom;
     private final Scanner scanner;
     private User user;
 
@@ -94,7 +96,7 @@ public class MyApplication {
         System.out.println("Welcome to the showroom!");
         while (true) {
             printShowRoomMenu();
-            int option = getMenuInput("Enter option (0-6): ", 6);
+            int option = getMenuInput("Enter option (0-7): ", 7);
 
             switch (option) {
                 case 1:
@@ -114,6 +116,9 @@ public class MyApplication {
                     break;
                 case 6:
                     getCarByModelMenu();
+                    break;
+                case 7:
+                    viewCartMenu();
                     break;
                 case 0:
                     System.out.println("Exiting the showroom.");
@@ -135,8 +140,49 @@ public class MyApplication {
         System.out.println("4. Get car by year of production");
         System.out.println("5. Get car by brand");
         System.out.println("6. Get car by model");
+        System.out.println("7. Check cart");
         System.out.println("0. Exit");
         System.out.println();
+    }
+
+    private void viewCartMenu(){
+        while(true){
+            user.getCart().displayCartInfo();
+            int option = getMenuInput("\nSelect option:\n1. Add car to cart\n2. Remove car from cart\n3. Clear cart\n0. Exit\nEnter option (1 or 3): ", 3);
+            switch (option) {
+                case 1:
+                    addToCartMenu();
+                    break;
+                case 2:
+                    removeFromCartMenu();
+                    break;
+                case 3:
+                    user.getCart().clearCart();
+                    break;
+                case 0:
+                    System.out.println("Exiting the application. Goodbye!");
+                    return;
+                default:
+                    System.out.println("Invalid option. Please select a valid option (1 or 3).");
+                    break;
+            }
+        }
+    }
+
+    private void addToCartMenu(){
+        int id = getUserInputInt("Please enter the car ID of the car you want to add to the cart: ");
+        Car car = carController.getCar(id);
+
+        if (car == null) {
+            System.out.println("Car with ID " + id + " was not found!");
+        } else {
+            user.getCart().addToCart(car);
+        }
+    }
+
+    private void removeFromCartMenu(){
+        int id = getUserInputInt("Please enter the cart item ID of the car you want to remove from the cart: ");
+        user.getCart().removeFromCart(id);
     }
 
     private void getAllCarsMenu() {
@@ -146,8 +192,10 @@ public class MyApplication {
 
     private void getCarByIdMenu() {
         int id = getUserInputInt("Please enter id: ");
-        String response = carController.getCar(id);
-        System.out.println(response);
+        Car car = carController.getCar(id);
+        if(car == null){
+            System.out.println("Car was not found!");
+        }
     }
 
     private void getCarByPriceMenu() {

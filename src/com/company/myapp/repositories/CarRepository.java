@@ -3,7 +3,7 @@ package com.company.myapp.repositories;
 import com.company.myapp.data.interfaces.IDB;
 import com.company.myapp.cars.Car;
 
-import com.company.myapp.details.engine.interfaces.IEngineStrategy;
+import com.company.myapp.details.engine.Engine;
 import com.company.myapp.details.engine.types.ElectroEngineStrategy;
 import com.company.myapp.details.engine.types.ICEStrategy;
 import com.company.myapp.details.transmission.Transmission;
@@ -119,7 +119,7 @@ public class CarRepository implements ICarRepository {
 
             ps.setString(1, car.getBrand());
             ps.setString(2, car.getModel());
-            IEngineStrategy engine = car.getEngine();
+            Engine engine = car.getEngine();
             ps.setString(3, engine.getType());
 
             if (engine instanceof ICEStrategy) {

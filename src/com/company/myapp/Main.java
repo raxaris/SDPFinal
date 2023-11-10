@@ -1,5 +1,6 @@
 package com.company.myapp;
 
+import com.company.myapp.application.MyApplication;
 import com.company.myapp.controllers.CarController;
 import com.company.myapp.controllers.UserController;
 import com.company.myapp.data.DBSingleton;

@@ -1,6 +1,6 @@
 package com.company.myapp.cars;
 
-import com.company.myapp.details.engine.interfaces.IEngineStrategy;
+import com.company.myapp.details.engine.Engine;
 import com.company.myapp.details.transmission.Transmission;
 
 public abstract class Car {
@@ -11,10 +11,10 @@ public abstract class Car {
     protected  int yearOfProduction;
     protected String brand;
     protected String model;
-    protected IEngineStrategy engine;
+    protected Engine engine;
     protected Transmission transmission;
 
-    public Car(int id, String brand, String model, IEngineStrategy engine, Transmission transmission, double VIN, String color, int yearOfProduction, int price) {
+    public Car(int id, String brand, String model, Engine engine, Transmission transmission, double VIN, String color, int yearOfProduction, int price) {
         setVIN(VIN);
         setColor(color);
         setPrice(price);
@@ -54,7 +54,7 @@ public abstract class Car {
     public double getVIN() {return  VIN;}
     public String getColor() {return color;}
     public int getYearOfProduction() {return yearOfProduction;}
-    public IEngineStrategy getEngine() {return engine;}
+    public Engine getEngine() {return engine;}
     public void startEngine() {System.out.println("Engine started.");}
     public void stopEngine() {System.out.println("Engine stopped.");}
 
