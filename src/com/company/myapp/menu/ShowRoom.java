@@ -2,7 +2,6 @@ package com.company.myapp.menu;
 
 import com.company.myapp.cars.Car;
 import com.company.myapp.controllers.CarController;
-import com.company.myapp.user.User;
 import com.company.myapp.user.inferfaces.IPublisher;
 import com.company.myapp.user.inferfaces.IUser;
 

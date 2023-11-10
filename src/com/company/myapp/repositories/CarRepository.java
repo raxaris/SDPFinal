@@ -3,9 +3,9 @@ package com.company.myapp.repositories;
 import com.company.myapp.data.interfaces.IDB;
 import com.company.myapp.cars.Car;
 
-import com.company.myapp.details.engine.Engine;
-import com.company.myapp.details.engine.types.Electro;
-import com.company.myapp.details.engine.types.ICE;
+import com.company.myapp.details.engine.interfaces.IEngineStrategy;
+import com.company.myapp.details.engine.types.ElectroEngineStrategy;
+import com.company.myapp.details.engine.types.ICEStrategy;
 import com.company.myapp.details.transmission.Transmission;
 import com.company.myapp.repositories.interfaces.ICarRepository;
 
@@ -119,21 +119,21 @@ public class CarRepository implements ICarRepository {
 
             ps.setString(1, car.getBrand());
             ps.setString(2, car.getModel());
-            Engine engine = car.getEngine();
+            IEngineStrategy engine = car.getEngine();
             ps.setString(3, engine.getType());
 
-            if (engine instanceof ICE) {
-                ICE ice = (ICE) engine;
-                ps.setString(4, ice.getTypeOfFuel());
-                ps.setInt(5, ice.getTorque());
-                ps.setDouble(6, ice.getEngineVolume());
-                ps.setInt(7, ice.getHorsepower());
-            } else if (engine instanceof Electro) {
-                Electro electro = (Electro) engine;
+            if (engine instanceof ICEStrategy) {
+                ICEStrategy iceStrategy = (ICEStrategy) engine;
+                ps.setString(4, iceStrategy.getTypeOfFuel());
+                ps.setInt(5, iceStrategy.getTorque());
+                ps.setDouble(6, iceStrategy.getEngineVolume());
+                ps.setInt(7, iceStrategy.getHorsepower());
+            } else if (engine instanceof ElectroEngineStrategy) {
+                ElectroEngineStrategy electroEngineStrategy = (ElectroEngineStrategy) engine;
                 ps.setNull(4, Types.VARCHAR);
-                ps.setInt(5, electro.getTorque());
+                ps.setInt(5, electroEngineStrategy.getTorque());
                 ps.setNull(6, java.sql.Types.DOUBLE);
-                ps.setInt(7, electro.getPower());
+                ps.setInt(7, electroEngineStrategy.getPower());
             } else {
                 throw new IllegalArgumentException("Error. Invalid engine type");
             }
