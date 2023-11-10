@@ -25,10 +25,11 @@ public class User implements IUser {
         this.cart = cart;
     }
 
-    public User(String login, String password, String email, boolean isAdmin){
+    public User(String login, String password, String email, boolean isAdmin) {
         this.login = login;
         this.password = password;
         this.email = email;
+        this.isAdmin = isAdmin;
     }
 
     public int getId() {

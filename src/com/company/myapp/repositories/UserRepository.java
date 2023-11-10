@@ -85,7 +85,7 @@ public class UserRepository implements IUserRepository {
             return false;
         }
     }
-
+    @Override
     public User getUserByCredentials(String login, String password) {
         try (Connection con = db.getConnection();
              PreparedStatement ps = con.prepareStatement("SELECT * FROM users WHERE login = ? AND password = ?")) {
@@ -103,7 +103,7 @@ public class UserRepository implements IUserRepository {
 
         return null;
     }
-
+    @Override
     public boolean isLoginAvailable(String login) {
         try (Connection con = db.getConnection();
              PreparedStatement ps = con.prepareStatement("SELECT * FROM users WHERE login = ?")) {

@@ -2,11 +2,11 @@ package com.company.myapp.details.engine.types;
 
 import com.company.myapp.details.engine.Engine;
 
-public class Electro extends Engine {
+public class ElectroEngineStrategy extends Engine {
     private int power;
     private int torque;
 
-    public Electro(int torque, int power) {
+    public ElectroEngineStrategy(int torque, int power) {
         this.torque = torque;
         this.power = power;
         type = "Electro";
@@ -18,6 +18,11 @@ public class Electro extends Engine {
 
     public String getType() {
         return type;
+    }
+
+    @Override
+    public void startEngine() {
+        System.out.println("No sound.");
     }
 
     public int getTorque() {

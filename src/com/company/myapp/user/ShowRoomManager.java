@@ -5,10 +5,10 @@ import com.company.myapp.user.inferfaces.IUser;
 
 import java.util.ArrayList;
 
-public class CarManager implements IPublisher {
+public class ShowRoomManager implements IPublisher {
     private final ArrayList<IUser> subscribers;
 
-    public CarManager() {
+    public ShowRoomManager() {
         this.subscribers = new ArrayList<>();
     }
 

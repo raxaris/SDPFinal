@@ -2,13 +2,13 @@ package com.company.myapp.details.engine.types;
 
 import com.company.myapp.details.engine.Engine;
 
-public class ICE extends Engine {
+public class ICEStrategy extends Engine {
     private int torque;
     private double engineVolume;
     private int horsePower;
     private String typeOfFuel;
 
-    public ICE(int torque, double engineVolume, int horsepower, String typeOfFuel) {
+    public ICEStrategy(int torque, double engineVolume, int horsepower, String typeOfFuel) {
         this.torque = torque;
         this.engineVolume = engineVolume;
         this.horsePower = horsepower;
@@ -17,6 +17,10 @@ public class ICE extends Engine {
     }
     public String getType() {
         return type;
+    }
+
+    public void startEngine() {
+        System.out.println("Sound of " + engineVolume + "L, " + horsePower + "HP " + "engine." );
     }
 
     public double getEngineVolume() {
