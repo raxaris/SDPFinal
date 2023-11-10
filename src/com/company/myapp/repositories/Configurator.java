@@ -2,7 +2,6 @@ package com.company.myapp.repositories;
 
 import com.company.myapp.cars.Car;
 import com.company.myapp.details.engine.Engine;
-import com.company.myapp.details.engine.interfaces.IEngineStrategy;
 import com.company.myapp.details.transmission.Transmission;
 import com.company.myapp.factory.CarFactory;
 import com.company.myapp.factory.brandfactories.*;
@@ -14,7 +13,7 @@ import java.sql.SQLException;
 public class Configurator {
     Car car = null;
     Transmission transmission = null;
-    IEngineStrategy engine = null;
+    Engine engine = null;
     CarFactory bmwFactory = new BMWFactory();
     CarFactory audiFactory = new AudiFactory();
     CarFactory mercedesFactory = new MercedesFactory();

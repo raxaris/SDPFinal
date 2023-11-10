@@ -1,10 +1,8 @@
 package com.company.myapp.menu;
 
-import com.company.myapp.cars.Car;
 import com.company.myapp.user.inferfaces.IUser;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ShowRoomManager{
     private final ArrayList<IUser> subscribers;

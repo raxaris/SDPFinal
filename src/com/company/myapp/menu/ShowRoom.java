@@ -3,8 +3,6 @@ package com.company.myapp.menu;
 import com.company.myapp.cars.Car;
 import com.company.myapp.controllers.CarController;
 
-import java.util.List;
-
 public class ShowRoom {
     private final CarController controller;
     private final ShowRoomManager showRoomManager;

@@ -1,9 +1,6 @@
 package com.company.myapp;
 
-import com.company.myapp.application.MyApplication;
 import com.company.myapp.application.MyApplication1;
-import com.company.myapp.cars.Car;
-import com.company.myapp.cars.brands.BMW;
 import com.company.myapp.controllers.CarController;
 import com.company.myapp.controllers.UserController;
 import com.company.myapp.data.DBSingleton;
