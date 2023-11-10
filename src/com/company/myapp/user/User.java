@@ -38,10 +38,6 @@ public class User implements IUser {
     public String getLogin() {
         return login;
     }
-    public String getName() {
-        return email;
-    }
-
     public String getPassword() {
         return password;
     }

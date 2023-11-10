@@ -2,37 +2,27 @@ package com.company.myapp.menu;
 
 import com.company.myapp.cars.Car;
 import com.company.myapp.controllers.CarController;
-import com.company.myapp.user.inferfaces.IPublisher;
-import com.company.myapp.user.inferfaces.IUser;
 
 import java.util.List;
 
 public class ShowRoom {
     private final CarController controller;
-    private final IPublisher ShowRoomManager;
-    private final List<Car> cars;
-    public ShowRoom(CarController controller, IPublisher ShowRoomManager) {
+    private final ShowRoomManager showRoomManager;
+    public ShowRoom(CarController controller) {
         this.controller = controller;
-        cars = controller.getAllCars();
-        this.ShowRoomManager = ShowRoomManager;
+        showRoomManager = new ShowRoomManager();
     }
-    public void addCar(Car car){
-        cars.add(car);
+
+    public void addCarToShowRoom(Car car){
         controller.addCar(car);
-        ShowRoomManager.notifySubscribers("Added: \n" + car.toString());
+        showRoomManager.notifySubscribers("Car added: \n" + car.toString());
     }
-    public void removeCar(Car car){
-        cars.remove(car);
+    public void removeCarFromShowRoom(Car car){
         controller.removeCar(car);
-        ShowRoomManager.notifySubscribers("Removed: \n" + car.toString());
-    }
-    public void subscribe(IUser subscriber) {
-        ShowRoomManager.subscribe(subscriber);
+        showRoomManager.notifySubscribers("Car removed: \n" + car.toString());
     }
 
-    public void unSubscribe(IUser subscriber) {
-        ShowRoomManager.unSubscribe(subscriber);
+    public ShowRoomManager getShowRoomManager(){
+        return showRoomManager;
     }
-
-
 }

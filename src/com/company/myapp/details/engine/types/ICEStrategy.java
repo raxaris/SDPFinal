@@ -1,6 +1,5 @@
 package com.company.myapp.details.engine.types;
 
-import com.company.myapp.details.engine.Adapter.Interfaces.GasolineType;
 import com.company.myapp.details.engine.Engine;
 
 public class ICEStrategy extends Engine {
@@ -17,7 +16,7 @@ public class ICEStrategy extends Engine {
         type = "ICE";
     }
 
-    public void startEngine(GasolineType gasoline) {
+    public void startEngine() {
         System.out.println("Sound of " + engineVolume + "L, " + horsePower + "HP " + "engine." );
     }
 
