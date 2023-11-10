@@ -8,5 +8,4 @@ public abstract class Engine implements IEngineStrategy {
     public String getType() {
         return type;
     }
-    public abstract void startEngine();
 }
