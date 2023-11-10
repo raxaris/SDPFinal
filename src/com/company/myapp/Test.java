@@ -9,6 +9,9 @@ import com.company.myapp.decorators.ABSCarbonSpoiler;
 import com.company.myapp.decorators.CarBodyKitDecorator;
 import com.company.myapp.decorators.CarbonSideSkirts;
 import com.company.myapp.decorators.SprinterBumpers;
+import com.company.myapp.details.engine.Adapter.GasolineAI92;
+import com.company.myapp.details.engine.Adapter.Interfaces.GasolineType;
+import com.company.myapp.details.engine.types.ElectroEngineStrategy;
 import com.company.myapp.details.engine.types.ICEStrategy;
 import com.company.myapp.details.transmission.types.Auto;
 import com.company.myapp.repositories.CarRepository;
@@ -24,6 +27,9 @@ public class Test {
         Car M5_modded = new ABSCarbonSpoiler(M5);
         Car M5_modded1 = new CarbonSideSkirts(M5_modded);
         Car M5_modded2 = new SprinterBumpers(M5_modded1);
-        M5_modded2.startEngine();
+        M5_modded2.startEngine ();
+        BMW I8 = new BMW(16,"I8",new ElectroEngineStrategy(400,500),new Auto(),5555.0,"black",2015,20000000);
+        I8.startEngine();
+
     }
 }
