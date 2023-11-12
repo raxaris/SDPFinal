@@ -13,8 +13,15 @@ public class Cart {
     public Cart(List<Car> cart) {
         this.cart = cart;
     }
-    public void addToCart(Car car){
+    public boolean addCarToCart(Car car) {
+        for (Car existingCar : cart) {
+            if (existingCar.getId() == (car.getId())) {
+                System.out.println("Car ID: " + car.getId() + " already added to cart!");
+                return false;
+            }
+        }
         cart.add(car);
+        return true;
     }
     public void removeFromCart(int id){
         if (id >= 0 && id < cart.size()) {

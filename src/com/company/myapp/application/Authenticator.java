@@ -44,11 +44,11 @@ public class Authenticator {
 
             if (user != null) {
                 System.out.println("You successfully logged in!");
-                System.out.println("*************************");
+                System.out.println("*******************************");
                 return user;
             } else {
                 System.out.println("Incorrect login or password. Try again!");
-                System.out.println("*************************");
+                System.out.println("*******************************");
             }
         }
     }
@@ -73,7 +73,7 @@ public class Authenticator {
             } else {
                 System.out.println("Error. Try again!");
             }
-            System.out.println("*************************");
+            System.out.println("*******************************");
             System.out.println();
         }
     }

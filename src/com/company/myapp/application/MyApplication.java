@@ -1,6 +1,8 @@
 package com.company.myapp.application;
 
+import com.company.myapp.application.admin.AdminApplication;
 import com.company.myapp.application.interfaces.IApplicationStrategy;
+import com.company.myapp.application.user.UserApplication;
 import com.company.myapp.controllers.CarController;
 import com.company.myapp.controllers.UserController;
 import com.company.myapp.user.User;

@@ -4,19 +4,17 @@ import com.company.myapp.user.inferfaces.IUser;
 
 import java.util.ArrayList;
 
-public class ShowRoomManager{
+public class ShowroomManager {
     private final ArrayList<IUser> subscribers;
 
-    public ShowRoomManager() {
+    public ShowroomManager() {
         this.subscribers = new ArrayList<>();
     }
 
     public boolean subscribe(IUser subscriber) {
         for (IUser existingSubscriber : subscribers) {
             if (existingSubscriber.getId() == (subscriber.getId())) {
-                System.out.println(subscriber.getLogin());
-                System.out.println(subscriber.getId());
-                System.out.println("User already subscribed!");
+                System.out.println("User login: " + subscriber.getLogin() + " already subscribed!");
                 return false;
             }
         }
