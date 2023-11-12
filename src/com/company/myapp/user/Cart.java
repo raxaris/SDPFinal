@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Cart {
-    private List<Car> cart;
+    private final List<Car> cart;
     public Cart(){
         cart = new ArrayList<>();
     }
@@ -38,5 +38,9 @@ public class Cart {
 
     public void clearCart(){
         cart.clear();
+    }
+
+    public List<Car> getCart(){
+        return cart;
     }
 }

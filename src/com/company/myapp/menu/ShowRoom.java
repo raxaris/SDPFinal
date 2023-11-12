@@ -11,13 +11,13 @@ public class ShowRoom {
         showRoomManager = new ShowRoomManager();
     }
 
-    public void addCarToShowRoom(Car car){
-        controller.addCar(car);
+    public boolean addCarToShowRoom(Car car){
         showRoomManager.notifySubscribers("Car added: \n" + car.toString());
+        return controller.addCar(car);
     }
-    public void removeCarFromShowRoom(Car car){
-        controller.removeCar(car);
-        showRoomManager.notifySubscribers("Car removed: \n" + car.toString());
+    public boolean removeCarFromShowRoom(int id){
+        showRoomManager.notifySubscribers("Car removed: \n" + controller.getCar(id).toString());
+        return controller.removeCarByID(id);
     }
 
     public ShowRoomManager getShowRoomManager(){

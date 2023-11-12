@@ -40,7 +40,7 @@ AliSar CarMarket employs various design patterns to ensure robust functionality:
 3. **Decorator**: Enables dynamic vehicle customization.
 4. **Adapter**: Facilitates interactions between different components.
 5. **Observer**: Used to notify users about changes in the vehicle catalog, enhancing their experience and keeping them informed about updates.
-6. **Strategy**: Provides flexibility for vehicle actions and customization.
+6. **Strategy**: Provides flexibility for applications.
 
 ## Getting Started
 

@@ -7,9 +7,10 @@ public class User implements IUser {
     private final String login;
     private String password;
     private final String email;
-    private Cart cart;
+    private final Cart cart;
     private final boolean isAdmin;
     public User(int id, String login,String password, String email, boolean isAdmin) {
+        this.id = id;
         this.login = login;
         this.password = password;
         this.email = email;
@@ -18,6 +19,7 @@ public class User implements IUser {
     }
 
     public User(int id, String login, String password, String email, boolean isAdmin, Cart cart) {
+        this.id = id;
         this.login = login;
         this.password = password;
         this.email = email;
@@ -30,11 +32,14 @@ public class User implements IUser {
         this.password = password;
         this.email = email;
         this.isAdmin = isAdmin;
+        this.cart = new Cart();
     }
 
+    @Override
     public int getId() {
         return id;
     }
+    @Override
     public String getLogin() {
         return login;
     }
