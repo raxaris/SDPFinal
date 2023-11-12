@@ -1,15 +1,17 @@
 package com.company.myapp.controllers;
 
 import com.company.myapp.cars.Car;
+import com.company.myapp.repositories.Configurator;
 import com.company.myapp.repositories.interfaces.ICarRepository;
 
 import java.util.List;
 
 public class CarController {
     private final ICarRepository carRepository;
-
+    private final Configurator configurator;
     public CarController(ICarRepository carRepository) {
         this.carRepository = carRepository;
+        this.configurator = new Configurator();
     }
     public boolean addCar(Car car){
         return carRepository.addCar(car);
@@ -17,6 +19,9 @@ public class CarController {
 
     public boolean removeCar(Car car){
         return carRepository.deleteCar(car.getId());
+    }
+    public boolean removeCarByID(int id){
+        return carRepository.deleteCar(id);
     }
 
     public Car getCar(int id) {
@@ -47,5 +52,9 @@ public class CarController {
     public List<Car> getCarByModel(String brand, String model) {
         List<Car> cars = carRepository.getCarByModel(brand, model);
         return cars;
+    }
+
+    public Configurator getConfigurator(){
+        return configurator;
     }
 }

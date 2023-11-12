@@ -20,10 +20,13 @@ public class UserController {
     public boolean  removeUser(User user){
         return userRepository.deleteUser(user.getId());
     }
+    public boolean removeUserByID(int id){
+        return userRepository.deleteUser(id);
+    }
 
-    public String getUser(int id) {
+    public User getUser(int id) {
         User user = userRepository.getUserByID(id);
-        return (user == null ? "User was not found!" : user.toString());
+        return user;
     }
 
     public List<User> getAllUsers() {

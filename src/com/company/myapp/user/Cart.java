@@ -6,15 +6,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Cart {
-    private List<Car> cart;
+    private final List<Car> cart;
     public Cart(){
         cart = new ArrayList<>();
     }
     public Cart(List<Car> cart) {
         this.cart = cart;
     }
-    public void addToCart(Car car){
+    public boolean addCarToCart(Car car) {
+        for (Car existingCar : cart) {
+            if (existingCar.getId() == (car.getId())) {
+                System.out.println("Car ID: " + car.getId() + " already added to cart!");
+                return false;
+            }
+        }
         cart.add(car);
+        return true;
     }
     public void removeFromCart(int id){
         if (id >= 0 && id < cart.size()) {
@@ -38,5 +45,9 @@ public class Cart {
 
     public void clearCart(){
         cart.clear();
+    }
+
+    public List<Car> getCart(){
+        return cart;
     }
 }
