@@ -7,13 +7,11 @@ import com.company.myapp.factory.CarFactory;
 import com.company.myapp.factory.brandfactories.*;
 import com.company.myapp.user.User;
 
+import java.util.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Configurator {
-    Car car = null;
-    Transmission transmission = null;
-    Engine engine = null;
     CarFactory bmwFactory = new BMWFactory();
     CarFactory audiFactory = new AudiFactory();
     CarFactory mercedesFactory = new MercedesFactory();
@@ -25,9 +23,9 @@ public class Configurator {
     public Configurator() {}
     public Car createCar(int id, String brand, String model, String engineType, String fuel, int torque, double volume, int power, String transmissionType, int gears, int yearOfProduction, int price, double VIN, String color){
         CarFactory factory = getCarFactory(brand);
-        engine = factory.createEngine(engineType, fuel, torque, volume, power);
-        transmission = factory.createTransmission(transmissionType, gears);
-        car = factory.createCar(id, model, engine, transmission, VIN, color, yearOfProduction, price);
+        Engine engine = factory.createEngine(engineType, fuel, torque, volume, power);
+        Transmission transmission = factory.createTransmission(transmissionType, gears);
+        Car car = factory.createCar(id, model, engine, transmission, VIN, color, yearOfProduction, price);
         return car;
     }
 
@@ -44,12 +42,13 @@ public class Configurator {
         int gears = rs.getInt("gears");
         int yearOfProduction = rs.getInt("years");
         int price = rs.getInt("price");
+        Random random = new Random();
         double VIN = rs.getDouble("VIN");
         String color = rs.getString("color");
         CarFactory factory = getCarFactory(brand);
-        engine = factory.createEngine(engineType, fuel, torque, volume, power);
-        transmission = factory.createTransmission(transmissionType, gears);
-        car = factory.createCar(id, model, engine, transmission, VIN, color, yearOfProduction, price);
+        Engine engine = factory.createEngine(engineType, fuel, torque, volume, power);
+        Transmission transmission = factory.createTransmission(transmissionType, gears);
+        Car car = factory.createCar(id, model, engine, transmission, VIN, color, yearOfProduction, price);
         return car;
     }
 

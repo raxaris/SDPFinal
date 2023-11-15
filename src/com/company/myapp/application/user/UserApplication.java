@@ -34,7 +34,7 @@ public class UserApplication implements IApplicationStrategy{
                 ─────▀█▀█▀
                 """);
         while (true) {
-            int option = InputUtils.getMenuInput("Select option:\n1. Create a car\n2. Show showroom\n3. Show cart\n0. Exit\nEnter option (1 or 3): ", 3);
+            int option = InputUtils.getMenuInput("Select option:\n1. Create your own car\n2. Show showroom\n3. Show cart\n0. Exit\nEnter option (1 or 3): ", 3);
             switch (option) {
                 case 1 -> carCreationMenuHandler.processCarMenu();
                 case 2 -> showRoomMenuHandler.processShowroomMenu();

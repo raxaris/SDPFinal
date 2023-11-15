@@ -80,7 +80,6 @@ public class CarRepository implements ICarRepository {
         }
     }
 
-
     public List<Car> getCarByPrice(int start, int end) {
         String query = "SELECT * FROM cars WHERE price BETWEEN ? AND ?";
         return getCarsByQuery(query, start, end);
@@ -99,7 +98,7 @@ public class CarRepository implements ICarRepository {
         String query = "SELECT * FROM cars WHERE brand = ? AND model = ?";
         return getCarsByQuery(query, brand, model);
     }
-
+    //
     public boolean deleteCar(int id) {
         try (Connection con = db.getConnection();
              PreparedStatement ps = con.prepareStatement("DELETE FROM cars WHERE id = ?")) {
@@ -152,5 +151,50 @@ public class CarRepository implements ICarRepository {
             e.printStackTrace();
             return false;
         }
+    }
+    //
+    private List<String> getStringListByQuery(String query, Object... params) {
+        try (Connection con = db.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+
+            for (int i = 0; i < params.length; i++) {
+                ps.setObject(i + 1, params[i]);
+            }
+
+            try (ResultSet rs = ps.executeQuery()) {
+                List<String> result = new ArrayList<>();
+                while (rs.next()) {
+                    result.add(rs.getString(1));
+                }
+                return result;
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+
+    public List<String> getAllBrands() {
+        String query = "SELECT DISTINCT brand FROM prototypes";
+        return getStringListByQuery(query);
+    }
+
+    public List<String> getModelsByBrand(String brand) {
+        String query = "SELECT DISTINCT model FROM prototypes WHERE brand = ?";
+        return getStringListByQuery(query, brand);
+    }
+
+    public List<String> getModificationsByBrandAndModel(String brand, String model) {
+        String query = "SELECT DISTINCT modification FROM prototypes WHERE brand = ? AND model = ?";
+        return getStringListByQuery(query, brand, model);
+    }
+
+    @Override
+
+    public Car getCarByFullName(String brand, String model, String modification) {
+        String query = "SELECT id, brand, model || ' ' || modification AS model, engine_type, fuel, torque, volume, power, transmission, gears, years, price, VIN, color\n" +
+                "FROM prototypes\n" +
+                "WHERE brand = ? AND model = ? AND modification = ?";
+        return getCarsByQuery(query, brand, model, modification).get(0);
     }
 }

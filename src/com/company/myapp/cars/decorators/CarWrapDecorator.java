@@ -1,15 +1,14 @@
 package com.company.myapp.cars.decorators;
 
-
-import com.company.myapp.cars.Car;
+import com.company.myapp.cars.ICar;
 import com.company.myapp.details.engine.Engine;
 import com.company.myapp.details.transmission.Transmission;
 
-public abstract class CarWrapDecorator extends Car {
-    Car car;
+public abstract class CarWrapDecorator implements ICar {
+    ICar car;
     public abstract String toString();
     public abstract int getPrice();
-    public CarWrapDecorator(Car car){
+    public CarWrapDecorator(ICar car){
         this.car = car;
     }
     public int getId() {
@@ -34,5 +33,7 @@ public abstract class CarWrapDecorator extends Car {
     public Engine getEngine() {
         return car.getEngine();
     }
-
+    public void setColor(String color) {
+        car.setColor(color);
+    }
 }

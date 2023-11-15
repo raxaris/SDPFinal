@@ -3,7 +3,7 @@ package com.company.myapp.cars;
 import com.company.myapp.details.engine.Engine;
 import com.company.myapp.details.transmission.Transmission;
 
-public abstract class Car {
+public abstract class Car implements ICar{
     protected int id;
     protected int price;
     protected double VIN;
