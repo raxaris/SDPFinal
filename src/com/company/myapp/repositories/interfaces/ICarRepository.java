@@ -3,7 +3,6 @@ package com.company.myapp.repositories.interfaces;
 import com.company.myapp.cars.Car;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface ICarRepository {
     Car getCar(int id);
@@ -12,6 +11,10 @@ public interface ICarRepository {
     List<Car> getCarByYear(int start, int end);
     List<Car> getCarByBrand(String brand);
     List<Car> getCarByModel(String brand, String model);
+    List<String> getAllBrands();
+    List<String> getModelsByBrand(String brand);
+    List<String> getModificationsByBrandAndModel(String brand, String model);
+    Car getCarByFullName(String brand, String model, String modification);
     boolean addCar(Car car);
     boolean deleteCar(int id);
 }

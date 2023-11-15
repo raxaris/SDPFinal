@@ -54,6 +54,22 @@ public class CarController {
         return cars;
     }
 
+    public List<String> getAllBrands() {
+        return carRepository.getAllBrands();
+    }
+
+    public List<String> getModelsByBrand(String brand) {
+        return carRepository.getModelsByBrand(brand);
+    }
+
+    public List<String> getModificationsByBrandAndModel(String brand, String model) {
+        return carRepository.getModificationsByBrandAndModel(brand, model);
+    }
+
+    public Car getCarByFullName(String brand, String model, String modification) {
+        return carRepository.getCarByFullName(brand, model, modification);
+    }
+
     public Configurator getConfigurator(){
         return configurator;
     }
