@@ -1,16 +1,15 @@
 package com.company.myapp.cars.decorators;
 
-import com.company.myapp.cars.Car;
+import com.company.myapp.cars.ICar;
 
 public class PolyurethaneWrap extends CarWrapDecorator{
-    public PolyurethaneWrap(Car car) {
+    public PolyurethaneWrap(ICar car){
         super(car);
     }
 
     @Override
     public String toString() {
-        return car.toString() + "\n"+
-                ", wrapped in polyurethane defense wrap\n";
+        return car.toString() + "Wrapped in polyurethane defense wrap\n";
     }
 
     @Override

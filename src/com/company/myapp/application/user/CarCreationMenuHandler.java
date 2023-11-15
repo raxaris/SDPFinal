@@ -2,14 +2,20 @@ package com.company.myapp.application.user;
 
 
 import com.company.myapp.application.InputUtils;
+
 import com.company.myapp.cars.Car;
+import com.company.myapp.cars.ICar;
+import com.company.myapp.cars.decorators.CarbonWrapDecorator;
+import com.company.myapp.cars.decorators.ColorBlackWrapDecorator;
+import com.company.myapp.cars.decorators.PolyurethaneWrap;
 import com.company.myapp.controllers.CarController;
 import java.util.*;
 
 public class CarCreationMenuHandler {
     private final CarController carController;
-    private Car car;
-    public static final List<String> colors = new ArrayList<>(List.of(
+    private ICar car;
+    private ICar modifiedCar;
+    public final List<String> colors = new ArrayList<>(List.of(
             "Racing Yellow",
             "Jet Black",
             "Arctic White",
@@ -77,7 +83,26 @@ public class CarCreationMenuHandler {
     }
 
     public void customMenu(){
-
+        int option = InputUtils.getMenuInput("Select option:\n1. Wrap in armored film\n2. Wrap in carbon film\n3. Wrap in matte black film\n0. Exit\nEnter option (1 or 3): ", 3);
+        switch (option) {
+            case 1 -> {
+                modifiedCar = new PolyurethaneWrap(car);
+                car = modifiedCar;
+            }
+            case 2 -> {
+                modifiedCar = new CarbonWrapDecorator(car);
+                car = modifiedCar;
+            }
+            case 3 -> {
+                modifiedCar = new ColorBlackWrapDecorator(car);
+                car = modifiedCar;
+            }
+            case 0 -> {
+                System.out.println("Exiting the application. Goodbye!");
+                return;
+            }
+            default -> System.out.println("Invalid option. Please select a valid option (1 or 3).");
+        }
     }
 
     public void showCarMenu(){
