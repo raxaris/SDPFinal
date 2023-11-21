@@ -38,7 +38,7 @@ AliSar CarMarket employs various design patterns to ensure robust functionality:
 1. **Factory Method**: Used for creating vehicle objects.
 2. **Singleton**: Utilized for managing a singleton database instance, ensuring a single, centralized point for data storage and retrieval.
 3. **Decorator**: Enables dynamic vehicle customization.
-4. **Adapter**: Facilitates interactions between different components.
+4. **Adapter**: Facilitates communication between different file systems.
 5. **Observer**: Used to notify users about changes in the vehicle catalog, enhancing their experience and keeping them informed about updates.
 6. **Strategy**: Provides flexibility for applications.
 
