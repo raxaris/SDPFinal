@@ -1,6 +1,7 @@
 # CarMarketPro
 
 Welcome to Alisar CarMarket, a comprehensive automotive marketplace simulator, leveraging six design patterns, including Factory Method, Singleton, Decorator, Adapter, Observer, and Strategy. This application provides a rich and interactive experience, catering to both regular users and administrators.
+![image](https://github.com/raxaris/SDPFinal/assets/83949298/131bab56-a6be-4121-a362-1715c56ffce5)
 
 ## User Types
 
