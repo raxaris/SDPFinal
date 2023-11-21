@@ -1,0 +1,9 @@
+Toyota Prius
+ID: 23
+Price: 30000
+VIN: 8176821
+Color: Black
+Year of Production: 2022
+Engine: Electro 
+Torque: 283, Power: 101
+Transmission: Type: Manual, Gears: 5
